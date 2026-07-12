@@ -69,8 +69,6 @@ body.rtl #home-fab{left:auto;right:10px}
   box-shadow:0 18px 50px rgba(0,0,0,.55);
   padding:1.3rem 1.4rem 1.7rem;position:relative;margin-top:1.1rem}
 #sheet.tabs-on{margin-top:0}
-#sheet::before{content:'';position:absolute;top:0;bottom:0;left:44px;
-  width:1px;background:rgba(163,50,39,.35);pointer-events:none}
 @media(max-width:660px){ #sheet{border-left:none;border-right:none} }
 
 .screen{display:none}
@@ -4502,6 +4500,7 @@ let rgCounts={perfect:0,good:0,ok:0,miss:0};
 let rgPtr=0, rgChunk=-1, rgSlots=[], rgWords=[], rgWordPtr=0;
 let rgLastBeat=-9999, rgTotal=0, rgACtx=null, rgStripT0=0;
 let rgTier=0;
+const RG_TIERS={tiles:[3,6,9,12,15], tap:[10,25,50,75,100]};
 const RG_AHEAD=3.0, RG_FORCE=1.2, RG_MAXVIS=5;
 
 function rgNow(){
@@ -4583,9 +4582,10 @@ function rgApplyTier(t){
   const big=$('rg-tap-big');
   for(let i=1;i<=5;i++) big.classList.toggle('wt'+i, i===t);
   if(t>0){
+    const ms=RG_TIERS[rgMode]||RG_TIERS.tiles;
     const el=document.createElement('div');
     el.className='rg-tierup';
-    el.textContent='COMBO ×'+(t*10)+'!';
+    el.textContent='COMBO ×'+ms[t-1]+'!';
     document.body.appendChild(el);
     setTimeout(()=>el.remove(),1200);
   }
@@ -4900,7 +4900,9 @@ function rgResolve(s,j){
     if(j==='perfect'){
       rgComboV++;
       if(rgComboV>rgMaxCombo) rgMaxCombo=rgComboV;
-      const tier=Math.min(5,Math.floor(rgMaxCombo/10));
+      const ms=RG_TIERS[rgMode]||RG_TIERS.tiles;
+      let tier=0;
+      for(let i=0;i<ms.length;i++) if(rgMaxCombo>=ms[i]) tier=i+1;
       if(tier>rgTier) rgApplyTier(tier);
     } else {
       rgComboV=0;   // good/ok breaks the perfect streak
