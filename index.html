@@ -300,6 +300,18 @@ textarea{min-height:130px;line-height:1.7}
 #yt-wrap{width:100%;aspect-ratio:16/9;background:#000;border:1.5px solid var(--brass-dark);
   border-radius:4px;overflow:hidden;margin-bottom:12px}
 #yt-wrap iframe{width:100%;height:100%}
+#yt-wrap.audio-only{aspect-ratio:auto;height:auto;min-height:0;background:transparent;border:none;
+  display:flex;align-items:center;justify-content:center;padding:6px 0}
+audio.file-audio-visible{width:100%;display:block}
+#yt-wrap audio{display:none}
+#yt-wrap.audio-only audio.file-audio-visible{display:block}
+.src-tabs{display:flex;gap:8px;margin-bottom:8px}
+.src-tab{flex:1;padding:9px 8px;border-radius:9px;cursor:pointer;font:inherit;font-size:.85rem;
+  border:1.5px solid var(--brass-dark);background:transparent;color:var(--ink2)}
+.src-tab.active{background:var(--brass-dark);color:#fff;font-weight:600}
+#audio-pick-info{margin-top:6px}
+#audio-pick-info.ok{color:var(--brass-dark);font-weight:600}
+#audio-pick-info.bad{color:#c0392b;font-weight:600}
 #yt-unavailable{padding:2rem 1rem;text-align:center;color:#cfc4a5;font-style:italic;font-size:.95rem}
 #tag-cur{background:#f6f0df;border:1.5px solid var(--brass);border-radius:4px;
   padding:12px 14px;margin-bottom:10px;text-align:center}
@@ -618,35 +630,34 @@ textarea{min-height:130px;line-height:1.7}
 .spk-line-gap .spk-result{font-size:.95rem;font-weight:600;flex:1}
 .spk-line-gap.gap-ok{background:var(--ok-bg);border-color:var(--ok);border-style:solid}
 
-
 /* ═══════ RHYTHM BONUS (rg-) — full-screen arcade overlay ═══════ */
 #rhythm-overlay{position:fixed;inset:0;z-index:900;display:none;flex-direction:column;
-  background:#070b14;color:#e2e8f0;font-family:'Crimson Pro',sans-serif;
-  --rgh:#06b6d4;--rgp:#fbbf24;--rgg:#34d399;--rgo:#60a5fa;--rgm:#f87171;
-  --rgt:#1a2236;--rgtb:#2a3a5c;--rgm2:#e879f9;overflow:hidden;touch-action:manipulation;
+  background:#030020;color:#e2e8f0;font-family:'Crimson Pro',sans-serif;
+  --rgh:#77D970;--rgp:#fbbf24;--rgg:#17B978;--rgo:#B4AEE8;--rgm:#E90064;
+  --rgt:#060047;--rgtb:#071A52;--rgm2:#FF5F9E;overflow:hidden;touch-action:manipulation;
   user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
 #rhythm-overlay.open{display:flex}
 #rg-flash{position:absolute;inset:0;pointer-events:none;z-index:1;opacity:0;
-  background:radial-gradient(ellipse at 50% 60%,#06b6d40a 0%,transparent 65%)}
+  background:radial-gradient(ellipse at 50% 60%,#77D9700a 0%,transparent 65%)}
 #rg-flash.bp{animation:rgFlashP .32s ease-out}
 #rg-flash.bp2{animation:rgFlashP2 .32s ease-out}
 @keyframes rgFlashP{0%{opacity:1}100%{opacity:0}}
 @keyframes rgFlashP2{0%{opacity:1}100%{opacity:0}}
-#rg-flash.hue2{background:radial-gradient(ellipse at 50% 60%,#e879f90a 0%,transparent 65%)}
+#rg-flash.hue2{background:radial-gradient(ellipse at 50% 60%,#FF5F9E0a 0%,transparent 65%)}
 #rg-lasers{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.17;
   display:none;overflow:hidden}
 #rg-lasers.show{display:block}
 #rg-stage{position:absolute;inset:0;z-index:1;pointer-events:none;
   transition:background 1.2s ease;background:transparent}
-#rhythm-overlay.tier1 #rg-stage{background:radial-gradient(ellipse at 50% 85%,#1d4ed822 0%,transparent 62%)}
-#rhythm-overlay.tier2 #rg-stage{background:radial-gradient(ellipse at 50% 85%,#06b6d426 0%,transparent 62%)}
-#rhythm-overlay.tier3 #rg-stage{background:radial-gradient(ellipse at 50% 85%,#8b5cf628 0%,transparent 64%)}
-#rhythm-overlay.tier4 #rg-stage{background:radial-gradient(ellipse at 50% 85%,#e879f92a 0%,transparent 66%)}
+#rhythm-overlay.tier1 #rg-stage{background:radial-gradient(ellipse at 50% 85%,#440A6722 0%,transparent 62%)}
+#rhythm-overlay.tier2 #rg-stage{background:radial-gradient(ellipse at 50% 85%,#77D97026 0%,transparent 62%)}
+#rhythm-overlay.tier3 #rg-stage{background:radial-gradient(ellipse at 50% 85%,#93329E28 0%,transparent 64%)}
+#rhythm-overlay.tier4 #rg-stage{background:radial-gradient(ellipse at 50% 85%,#FF5F9E2a 0%,transparent 66%)}
 #rhythm-overlay.tier5 #rg-stage{background:radial-gradient(ellipse at 50% 85%,#fbbf242e 0%,transparent 68%)}
 .rg-tierup{position:fixed;left:50%;top:38%;transform:translate(-50%,-50%);z-index:970;
   font-family:'Special Elite',cursive;font-size:clamp(1.4rem,6vw,2.2rem);
   color:var(--rgp);letter-spacing:.12em;pointer-events:none;
-  text-shadow:0 0 20px #fbbf2470,0 0 44px #e879f950;
+  text-shadow:0 0 20px #fbbf2470,0 0 44px #FF5F9E50;
   animation:rgTierUp 1.15s ease-out forwards}
 @keyframes rgTierUp{0%{opacity:0;transform:translate(-50%,-50%) scale(.5)}
   20%{opacity:1;transform:translate(-50%,-50%) scale(1.15)}
@@ -656,8 +667,8 @@ textarea{min-height:130px;line-height:1.7}
 #rg-tap-big::before{content:'';position:absolute;left:16%;top:7%;width:68%;height:32%;
   border-radius:50%;background:linear-gradient(180deg,#ffffff30,transparent);
   opacity:0;transition:opacity .6s;pointer-events:none;z-index:3}
-#rg-tap-big.wt1{box-shadow:0 0 22px #06b6d435, inset 0 8px 14px #ffffff14, inset 0 -10px 18px #00000090}
-#rg-tap-big.wt2{background:radial-gradient(circle at 50% 30%, #1b3350, #04070e 75%);
+#rg-tap-big.wt1{box-shadow:0 0 22px #77D97035, inset 0 8px 14px #ffffff14, inset 0 -10px 18px #00000090}
+#rg-tap-big.wt2{background:radial-gradient(circle at 50% 30%, #0d0040, #030025 75%);
   border-color:#22d3ee;
   box-shadow:0 0 28px #22d3ee40, inset 0 8px 14px #ffffff18, inset 0 -10px 18px #00000090}
 #rg-tap-big.wt2::before,#rg-tap-big.wt3::before,#rg-tap-big.wt4::before,#rg-tap-big.wt5::before{opacity:1}
@@ -700,7 +711,20 @@ textarea{min-height:130px;line-height:1.7}
 .rg-conf{position:fixed;width:9px;height:14px;pointer-events:none;z-index:990;
   transition:transform 1.5s cubic-bezier(.2,.7,.3,1),opacity 1.5s ease}
 .rg-panel{position:absolute;inset:0;z-index:20;display:none;flex-direction:column;
-  align-items:center;justify-content:center;background:#070b14;padding:20px;text-align:center}
+  align-items:center;justify-content:center;background:#030020;padding:20px;text-align:center;
+  overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+/* When content is taller than the panel, stop centering so nothing is cut off */
+.rg-panel>*{flex-shrink:0}
+@media(max-height:760px){
+  .rg-panel{justify-content:flex-start;padding-top:56px;padding-bottom:32px}
+}
+/* Arrange & QuickPick are gameplay views: fill the panel, don't scroll the whole thing */
+#rg-arrange-panel, #rg-qp-panel{justify-content:flex-start;padding-top:14px;overflow:hidden}
+@media(max-height:760px){
+  #rg-arrange-panel, #rg-qp-panel{padding-top:14px}
+}
+#rg-arr-cards{overflow-y:auto;-webkit-overflow-scrolling:touch}
+
 .rg-panel.open{display:flex}
 .rg-title{font-family:'Special Elite',cursive;font-size:1.5rem;letter-spacing:.2em;
   text-transform:uppercase;color:var(--rgh);margin-bottom:4px}
@@ -710,7 +734,7 @@ textarea{min-height:130px;line-height:1.7}
 .rg-bigbtn{font-family:'Special Elite',cursive;font-size:1.05rem;padding:13px 46px;
   border:2px solid var(--rgh);border-radius:50px;background:transparent;color:var(--rgh);
   cursor:pointer;letter-spacing:.15em;text-transform:uppercase;margin:4px}
-.rg-bigbtn:active{background:var(--rgh);color:#070b14}
+.rg-bigbtn:active{background:var(--rgh);color:#030020}
 .rg-ghostbtn{font-size:.85rem;padding:9px 22px;border:1px solid #33415580;border-radius:50px;
   background:transparent;color:#94a3b8;cursor:pointer;margin:4px}
 .rg-opt{margin-top:16px;font-size:.85rem;color:#64748b;display:flex;align-items:center;
@@ -719,7 +743,7 @@ textarea{min-height:130px;line-height:1.7}
 .rg-opt input[type=checkbox]{accent-color:var(--rgh)}
 #rg-tempo-lbl{color:var(--rgh);min-width:40px;font-weight:600}
 #rg-close{position:absolute;top:10px;right:12px;z-index:40;width:36px;height:36px;
-  border-radius:50%;border:1px solid #33415580;background:#0d1320;color:#94a3b8;
+  border-radius:50%;border:1px solid #33415580;background:#060047;color:#94a3b8;
   font-size:1rem;cursor:pointer}
 #rg-hud{display:flex;justify-content:space-between;padding:12px 56px 4px 20px;z-index:5}
 .rg-hbox{text-align:center}
@@ -734,30 +758,30 @@ textarea{min-height:130px;line-height:1.7}
   font-size:.82rem;font-weight:600;color:transparent;transition:all .25s}
 .rg-slot.filled{border-style:solid;color:#e2e8f0}
 .rg-slot.filled.j-perfect{border-color:var(--rgp);color:var(--rgp);background:#fbbf2412}
-.rg-slot.filled.j-good{border-color:var(--rgg);color:var(--rgg);background:#34d39912}
-.rg-slot.filled.j-ok{border-color:var(--rgo);color:var(--rgo);background:#60a5fa12}
-.rg-slot.filled.j-miss{border-color:var(--rgm);color:var(--rgm);opacity:.5;background:#f8717112}
+.rg-slot.filled.j-good{border-color:var(--rgg);color:var(--rgg);background:#17B97812}
+.rg-slot.filled.j-ok{border-color:var(--rgo);color:var(--rgo);background:#B4AEE812}
+.rg-slot.filled.j-miss{border-color:var(--rgm);color:var(--rgm);opacity:.5;background:#E9006412}
 #rg-timeline{height:52px;position:relative;flex-shrink:0;overflow:hidden;z-index:5;
   border-top:1px solid #1e293b30;border-bottom:1px solid #1e293b30}
 #rg-rail{position:absolute;top:50%;left:0;right:0;height:2px;background:#1e293b;
   transform:translateY(-50%)}
 #rg-rail.bp{animation:rgRailP .3s ease-out}
 #rg-rail.bp2{animation:rgRailP2 .3s ease-out}
-@keyframes rgRailP{0%{box-shadow:0 0 10px #06b6d450}100%{box-shadow:none}}
-@keyframes rgRailP2{0%{box-shadow:0 0 10px #e879f950}100%{box-shadow:none}}
+@keyframes rgRailP{0%{box-shadow:0 0 10px #77D97050}100%{box-shadow:none}}
+@keyframes rgRailP2{0%{box-shadow:0 0 10px #FF5F9E50}100%{box-shadow:none}}
 #rg-tlc{position:absolute;top:0;bottom:0;left:0;will-change:transform}
 .rg-beat{position:absolute;top:32%;bottom:32%;width:1px;background:#2a3a5c45}
 .rg-beat.down{top:22%;bottom:22%;width:2px;background:#3b4f7a70}
 .rg-note{position:absolute;top:50%;height:11px;border-radius:6px;background:#334155;
   transform:translateY(-50%);transition:background .15s,box-shadow .15s}
-.rg-note.approaching{background:#06b6d480;box-shadow:0 0 8px #06b6d460}
-.rg-note.active{background:var(--rgh);box-shadow:0 0 14px #06b6d480}
+.rg-note.approaching{background:#77D97080;box-shadow:0 0 8px #77D97060}
+.rg-note.active{background:var(--rgh);box-shadow:0 0 14px #77D97080}
 .rg-note.hit-perfect{background:var(--rgp);box-shadow:0 0 10px #fbbf2450}
-.rg-note.hit-good{background:var(--rgg);box-shadow:0 0 10px #34d39950}
-.rg-note.hit-ok{background:var(--rgo);box-shadow:0 0 8px #60a5fa40}
+.rg-note.hit-good{background:var(--rgg);box-shadow:0 0 10px #17B97850}
+.rg-note.hit-ok{background:var(--rgo);box-shadow:0 0 8px #B4AEE840}
 .rg-note.hit-miss{background:var(--rgm);opacity:.4}
 #rg-ph{position:absolute;top:6px;bottom:6px;width:2px;left:30%;background:#fff;
-  z-index:6;box-shadow:0 0 8px var(--rgh),0 0 18px #e879f960}
+  z-index:6;box-shadow:0 0 8px var(--rgh),0 0 18px #FF5F9E60}
 #rg-area{flex:1;position:relative;min-height:0;overflow:hidden;z-index:5}
 .rg-tile{position:absolute;height:48px;min-width:48px;padding:0 13px;display:flex;
   align-items:center;justify-content:center;background:var(--rgt);
@@ -770,19 +794,19 @@ textarea{min-height:130px;line-height:1.7}
 .rg-tile.compact{padding:0 8px;font-size:.85rem}
 .rg-tile .rg-tt{position:relative;z-index:2}
 .rg-tile .rg-fill{position:absolute;left:0;top:0;bottom:0;width:0;
-  background:linear-gradient(90deg,#06b6d435,#06b6d455);z-index:1;border-radius:10px}
+  background:linear-gradient(90deg,#77D97035,#77D97055);z-index:1;border-radius:10px}
 .rg-tile .rg-hi{position:relative;z-index:2;margin-left:6px;font-size:.6rem;
   color:#64748b;letter-spacing:-1px}
-.rg-tile.charge-1{border-color:#06b6d440;box-shadow:0 0 6px #06b6d415}
-.rg-tile.charge-2{border-color:#06b6d480;box-shadow:0 0 12px #06b6d430;transform:scale(1.03)}
-.rg-tile.charge-3{border-color:var(--rgh);background:#06b6d418;
-  box-shadow:0 0 18px #06b6d450;transform:scale(1.07)}
+.rg-tile.charge-1{border-color:#77D97040;box-shadow:0 0 6px #77D97015}
+.rg-tile.charge-2{border-color:#77D97080;box-shadow:0 0 12px #77D97030;transform:scale(1.03)}
+.rg-tile.charge-3{border-color:var(--rgh);background:#77D97018;
+  box-shadow:0 0 18px #77D97050;transform:scale(1.07)}
 .rg-tile.bp{animation:rgTileP .28s ease-out}
 @keyframes rgTileP{0%{filter:brightness(1.6) saturate(1.4)}100%{filter:brightness(1)}}
-.rg-tile.holding{border-color:var(--rgh);background:#06b6d410;
-  box-shadow:0 0 20px #06b6d460;transform:scale(1.05)}
+.rg-tile.holding{border-color:var(--rgh);background:#77D97010;
+  box-shadow:0 0 20px #77D97060;transform:scale(1.05)}
 .rg-tile.done{opacity:0;transform:scale(.3);pointer-events:none;box-shadow:none}
-.rg-tile.missed-tile{background:#f8717110;border-color:var(--rgm);color:var(--rgm);
+.rg-tile.missed-tile{background:#E9006410;border-color:var(--rgm);color:var(--rgm);
   opacity:.3;pointer-events:none;box-shadow:none}
 .rg-tile.wrong{animation:rgShake .3s ease}
 @keyframes rgShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
@@ -823,25 +847,25 @@ textarea{min-height:130px;line-height:1.7}
 #rg-ref-line{font-size:clamp(.95rem,4.2vw,1.15rem);margin:12px 0 6px;
   max-width:min(480px,92vw);line-height:1.9;overflow-wrap:break-word;padding:0 8px}
 #rg-ref-line .sep{color:#33415560}
-#rg-ref-line .cur{background:#06b6d435;border-radius:4px;padding:1px 3px;color:#fff}
+#rg-ref-line .cur{background:#77D97035;border-radius:4px;padding:1px 3px;color:#fff}
 #rg-ref-line .done-syl{color:var(--rgg)}
 #rg-ref-prog{font-size:.8rem;color:#64748b;margin-bottom:14px}
 #rg-ref-tap{width:150px;height:150px;border-radius:50%;border:3px solid var(--rgh);
-  background:#06b6d415;color:var(--rgh);font-family:'Special Elite',cursive;
+  background:#77D97015;color:var(--rgh);font-family:'Special Elite',cursive;
   font-size:1.1rem;letter-spacing:.1em;cursor:pointer;margin:8px 0 16px}
-#rg-ref-tap:active{background:var(--rgh);color:#070b14;transform:scale(.95)}
+#rg-ref-tap:active{background:var(--rgh);color:#030020;transform:scale(.95)}
 #rg-play{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);z-index:30;
   width:110px;height:110px;border-radius:50%;border:3px solid var(--rgh);
-  background:#06b6d418;color:var(--rgh);font-size:2.4rem;cursor:pointer;display:none;
-  box-shadow:0 0 30px #06b6d430;padding-left:8px}
+  background:#77D97018;color:var(--rgh);font-size:2.4rem;cursor:pointer;display:none;
+  box-shadow:0 0 30px #77D97030;padding-left:8px}
 #rg-play.show{display:block}
 #rg-pause{width:34px;height:34px;border-radius:50%;border:1px solid #33415580;
-  background:#0d1320;color:#94a3b8;font-size:.85rem;cursor:pointer;display:none;
+  background:#060047;color:#94a3b8;font-size:.85rem;cursor:pointer;display:none;
   align-self:center}
 #rg-pause.show{display:block}
 #rg-count{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);z-index:35;
   font-family:'Special Elite',cursive;font-size:5rem;color:var(--rgh);display:none;
-  text-shadow:0 0 30px #06b6d460}
+  text-shadow:0 0 30px #77D97060}
 #rg-count.show{display:block}
 #rg-line{display:none;padding:8px 14px 6px;text-align:center;
   font-size:clamp(.95rem,4.2vw,1.25rem);
@@ -850,36 +874,83 @@ textarea{min-height:130px;line-height:1.7}
 #rg-line .sep{color:#33415560;padding:0}
 #rg-line.show{display:block}
 #rg-line span{padding:1px 4px;border-radius:5px;color:#475569;transition:all .15s}
-#rg-line .cur{background:#06b6d435;color:#fff;box-shadow:0 0 10px #06b6d430}
+#rg-line .cur{background:#77D97035;color:#fff;box-shadow:0 0 10px #77D97030}
 #rg-line .j-perfect{color:var(--rgp)}
 #rg-line .j-good{color:var(--rgg)}
 #rg-line .j-ok{color:var(--rgo)}
 #rg-line .j-miss{color:var(--rgm);opacity:.55}
-#rg-play:active{background:var(--rgh);color:#070b14}
+#rg-play:active{background:var(--rgh);color:#030020}
 #rg-tap-big{position:absolute;left:50%;top:55%;transform:translate(-50%,-50%);
   width:190px;height:190px;border-radius:50%;border:3px solid var(--rgh);
-  background:radial-gradient(circle at 50% 42%, #0e1a2e 0%, #070b14 70%);
+  background:radial-gradient(circle at 50% 42%, #0e1a2e 0%, #030020 70%);
   color:var(--rgh);font-family:'Special Elite',cursive;
   font-size:1.2rem;letter-spacing:.14em;cursor:pointer;display:none;z-index:12;
-  box-shadow:0 0 22px #06b6d435, inset 0 0 30px #06b6d415}
+  box-shadow:0 0 22px #77D97035, inset 0 0 30px #77D97015}
 #rg-tap-big.show{display:block}
 #rg-tap-big:active{transform:translate(-50%,-50%) scale(.95)}
 #rg-jog{position:absolute;inset:11px;border-radius:50%;
   border:3px dashed var(--rgm2);pointer-events:none;
-  box-shadow:0 0 14px #e879f940, inset 0 0 14px #e879f925;
+  box-shadow:0 0 14px #FF5F9E40, inset 0 0 14px #FF5F9E25;
   animation:rgSpin 9s linear infinite}
 #rg-jog.kick{animation:rgSpin .9s linear infinite}
 @keyframes rgSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 #rg-tap-big.bigpulse{animation:rgBigPulse .5s ease-out}
-@keyframes rgBigPulse{0%{box-shadow:0 0 22px #06b6d435}
-  35%{box-shadow:0 0 60px #fbbf2470,0 0 120px #e879f950;transform:translate(-50%,-50%) scale(1.08)}
-  100%{box-shadow:0 0 22px #06b6d435;transform:translate(-50%,-50%) scale(1)}}
+@keyframes rgBigPulse{0%{box-shadow:0 0 22px #77D97035}
+  35%{box-shadow:0 0 60px #fbbf2470,0 0 120px #FF5F9E50;transform:translate(-50%,-50%) scale(1.08)}
+  100%{box-shadow:0 0 22px #77D97035;transform:translate(-50%,-50%) scale(1)}}
 .rg-modebtn{display:block;width:250px;margin:6px auto;font-family:'Special Elite',cursive;
   font-size:.95rem;padding:13px 20px;border:2px solid var(--rgh);border-radius:14px;
   background:transparent;color:var(--rgh);cursor:pointer;letter-spacing:.08em}
-.rg-modebtn:active{background:var(--rgh);color:#070b14}
+.rg-modebtn:active{background:var(--rgh);color:#030020}
 .rg-modebtn .d{display:block;font-family:'Crimson Pro',serif;font-size:.72rem;
   color:#64748b;letter-spacing:0;margin-top:3px}
+
+.rg-diff-toggle{display:flex;justify-content:center;gap:6px;margin:-2px auto 8px}
+.rg-diff{font-family:'Special Elite',cursive;font-size:.8rem;letter-spacing:.06em;
+  padding:4px 18px;border-radius:6px;border:1px solid var(--rgh);
+  background:transparent;color:var(--rgh);cursor:pointer;opacity:.6;transition:all .15s}
+.rg-diff.active{background:var(--rgh);color:#060047;opacity:1;font-weight:bold}
+
+/* ── Arrange & QuickPick shared styles ── */
+.rg-arr-hud{display:flex;justify-content:space-between;padding:10px 16px;width:100%;max-width:460px;margin:0 auto}
+.rg-arr-hud-item{display:flex;flex-direction:column;align-items:center;gap:2px}
+.rg-arr-label{font-family:'Special Elite',cursive;font-size:.6rem;letter-spacing:.12em;color:#e879f9;text-transform:uppercase}
+.rg-arr-hud-item span:last-child{font-family:'Special Elite',cursive;font-size:1.1rem;color:#e879f9}
+.rg-arr-timer-wrap{width:calc(100% - 32px);max-width:460px;height:5px;background:rgba(254,255,222,.08);border-radius:3px;margin:4px auto 10px;overflow:hidden}
+.rg-arr-timer{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--rgh),var(--rgm2));transition:width .3s linear;width:100%}
+.rg-arr-timer.danger{background:linear-gradient(90deg,var(--rgm),var(--rgm2))}
+.rg-arr-vlabel{text-align:center;font-family:'Special Elite',cursive;font-size:.75rem;letter-spacing:.15em;color:#e879f9;margin-bottom:8px}
+#rg-arr-cards{flex:1;width:calc(100% - 24px);max-width:460px;margin:0 auto;display:flex;flex-direction:column;gap:10px;overflow-y:auto;padding:4px 0;touch-action:pan-y}
+.rg-arr-card{display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid rgba(119,217,112,.3);border-radius:12px;
+  background:rgba(7,26,82,.7);color:#e879f9;font-size:clamp(.85rem,3.5vw,1rem);transition:border-color .25s,box-shadow .25s;
+  cursor:grab;user-select:none;-webkit-user-select:none;touch-action:none}
+.rg-arr-card.dragging{border-color:var(--rgh);box-shadow:0 0 20px rgba(119,217,112,.35);cursor:grabbing;z-index:20}
+.rg-arr-card.wrong{border-color:var(--rgm);animation:rgShake .4s}
+.rg-arr-card.correct{border-color:#fbbf24;box-shadow:0 0 16px rgba(251,191,36,.35)}
+.rg-arr-card .grip{color:var(--rgo);font-size:1.1rem;flex-shrink:0}
+.rg-arr-card .card-text{flex:1;pointer-events:none;line-height:1.35}
+@keyframes rgShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+.rg-arr-btns{display:flex;gap:12px;justify-content:center;margin-top:12px;flex-shrink:0;padding-bottom:14px}
+.rg-arr-btn{padding:12px 24px;border:none;border-radius:10px;font-family:'Special Elite',cursive;font-size:.95rem;cursor:pointer;transition:all .15s}
+.rg-arr-replay{background:rgba(7,26,82,.7);color:var(--rgh);border:1px solid rgba(119,217,112,.3)}
+.rg-arr-check{background:linear-gradient(135deg,var(--rgh),var(--rgg));color:#060047;font-weight:bold}
+.rg-arr-check:active{transform:scale(.95)}
+/* QuickPick */
+.rg-qp-line-wrap{width:calc(100% - 24px);max-width:460px;text-align:center;padding:16px 8px;min-height:72px;display:flex;align-items:center;justify-content:center;margin:0 auto}
+.rg-qp-line{font-size:clamp(1.05rem,4.2vw,1.35rem);line-height:1.5;letter-spacing:.5px;color:#e879f9}
+.rg-qp-line .qgap{display:inline-block;min-width:60px;border-bottom:2px solid var(--rgm2);margin:0 4px;color:var(--rgm2)}
+.rg-qp-line .qgap.filled{color:#fbbf24;border-color:#fbbf24;animation:fillpop .4s}
+@keyframes fillpop{0%{transform:scale(1)}50%{transform:scale(1.15)}100%{transform:scale(1)}}
+.rg-qp-timer-wrap{width:calc(100% - 32px);max-width:460px;height:4px;background:rgba(254,255,222,.08);border-radius:2px;margin:0 auto 14px;overflow:hidden}
+.rg-qp-timer{height:100%;background:linear-gradient(90deg,var(--rgm2),var(--rgm));border-radius:2px;width:100%}
+#rg-qp-options{flex:1;width:calc(100% - 24px);max-width:460px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:12px;align-content:center;padding:8px 0}
+.rg-qp-opt{padding:18px 10px;border:1.5px solid rgba(119,217,112,.3);border-radius:14px;background:rgba(7,26,82,.7);color:#e879f9;
+  font-family:'Crimson Pro',serif;font-size:clamp(.95rem,3.8vw,1.15rem);font-weight:600;cursor:pointer;text-align:center;transition:all .15s}
+.rg-qp-opt:active{transform:scale(.95)}
+.rg-qp-opt.hit{border-color:#fbbf24;background:rgba(251,191,36,.14);color:#fbbf24;box-shadow:0 0 18px rgba(251,191,36,.35)}
+.rg-qp-opt.wrong{border-color:var(--rgm);background:rgba(233,0,100,.1);color:var(--rgm2);animation:rgShake .35s;pointer-events:none;opacity:.55}
+.rg-qp-opt.disabled{pointer-events:none;opacity:.4}
+#rg-qp-feedback{min-height:28px;text-align:center;font-family:'Special Elite',cursive;font-size:1rem;color:#fbbf24;flex-shrink:0}
 
 </style>
 </head>
@@ -1048,8 +1119,21 @@ textarea{min-height:130px;line-height:1.7}
     <div class="f-label">Translations <span class="opt">— optional, aligned line by line; used as guides in the reading &amp; typing levels</span></div>
     <textarea id="in-trans" style="min-height:90px" placeholder="(optional)"></textarea>
 
-    <div class="f-label">Music video <span class="opt">— optional YouTube URL for real sung audio</span></div>
-    <input type="text" id="in-video" placeholder="https://www.youtube.com/watch?v=...">
+    <div class="f-label">Audio source <span class="opt">— optional; pick one. Chosen once at import.</span></div>
+    <div class="src-tabs">
+      <button type="button" class="src-tab active" id="src-tab-yt" data-src="yt">▶ YouTube</button>
+      <button type="button" class="src-tab" id="src-tab-file" data-src="file">🎵 Audio file</button>
+    </div>
+
+    <div id="src-pane-yt">
+      <input type="text" id="in-video" placeholder="https://www.youtube.com/watch?v=...">
+    </div>
+
+    <div id="src-pane-file" class="hidden">
+      <input type="file" id="in-audio" accept="audio/*" style="display:none">
+      <button type="button" class="btn btn-ghost" id="pick-audio-btn" style="width:100%">Choose an audio file…</button>
+      <div id="audio-pick-info" class="f-hint"></div>
+    </div>
 
     <div class="f-hint">Finnish morphology runs offline in your browser. The first import downloads a one-time ~4 MB language pack, then works with no connection.</div>
 
@@ -1167,8 +1251,7 @@ textarea{min-height:130px;line-height:1.7}
   <div id="infl-menu"></div>
 </div>
 
-
-<button id="rg-test-fab" title="Rhythm test" style="position:fixed;top:10px;left:60px;z-index:100;width:42px;height:42px;border-radius:50%;border:2px solid var(--brass);background:#0d1320;color:#06b6d4;font-size:1.05rem;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.28)">🎵</button>
+<button id="rg-test-fab" title="Rhythm test" style="position:fixed;top:10px;left:60px;z-index:100;width:42px;height:42px;border-radius:50%;border:2px solid var(--brass);background:#060047;color:#77D970;font-size:1.05rem;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.28)">🎵</button>
 
 <div id="rhythm-overlay">
   <div id="rg-flash"></div>
@@ -1186,7 +1269,20 @@ textarea{min-height:130px;line-height:1.7}
     <button class="rg-modebtn" id="rg-mode-tiles">🧩 Tile Tap
       <span class="d">find &amp; tap the scattered syllable tiles in order</span>
       <span class="best" id="rg-best-tiles"></span></button>
+    <div class="rg-diff-toggle" id="rg-diff-wrap">
+      <button class="rg-diff active" id="rg-diff-easy" data-diff="easy">Easy</button>
+      <button class="rg-diff" id="rg-diff-hard" data-diff="hard">Hard</button>
+    </div>
     <button class="rg-ghostbtn" id="rg-refine-btn">⏱ Refine rhythm (tap syllables)</button>
+    <div style="width:220px;margin:16px auto 6px;border-top:1px solid rgba(119,217,112,.2);padding-top:14px">
+      <div style="font-family:'Special Elite',cursive;font-size:.75rem;color:#B4AEE8;letter-spacing:.15em;text-transform:uppercase;text-align:center;margin-bottom:8px">WORD GAMES</div>
+    </div>
+    <button class="rg-modebtn" id="rg-mode-arrange">🧩 Verse Arrange
+      <span class="d">hear a verse — drag the lines into the right order</span>
+      <span class="best" id="rg-best-arrange"></span></button>
+    <button class="rg-modebtn" id="rg-mode-quickpick">⚡ Quick Pick
+      <span class="d">pick the missing word from 6 options as the song plays</span>
+      <span class="best" id="rg-best-quickpick"></span></button>
     <div class="rg-opt">
       <label>Tempo</label>
       <input type="range" id="rg-tempo" min="50" max="100" value="100" step="25">
@@ -1211,6 +1307,7 @@ textarea{min-height:130px;line-height:1.7}
   <!-- results panel -->
   <div class="rg-panel" id="rg-results-panel">
     <div class="rg-grade" id="rg-grade"></div>
+
     <div id="rg-rscore"></div>
     <div id="rg-racc"></div>
     <div class="rg-break">
@@ -1229,6 +1326,36 @@ textarea{min-height:130px;line-height:1.7}
       <button class="rg-ghostbtn" id="rg-exit-btn">Back to song</button>
     </div>
   </div>
+
+<!-- Verse Arrange panel -->
+  <div class="rg-panel" id="rg-arrange-panel">
+    <div class="rg-arr-hud">
+      <span class="rg-arr-hud-item"><span class="rg-arr-label">PTS</span><span id="rg-arr-pts">0</span></span>
+      <span class="rg-arr-hud-item"><span class="rg-arr-label">TIME</span><span id="rg-arr-time">0</span></span>
+      <span class="rg-arr-hud-item"><span class="rg-arr-label">BONUS</span><span id="rg-arr-bonus">0s</span></span>
+    </div>
+    <div class="rg-arr-timer-wrap"><div class="rg-arr-timer" id="rg-arr-timer-bar"></div></div>
+    <div class="rg-arr-vlabel" id="rg-arr-vlabel">VERSE 1</div>
+    <div id="rg-arr-cards"></div>
+    <div class="rg-arr-btns">
+      <button class="rg-arr-btn rg-arr-replay" id="rg-arr-replay">🔊 Replay</button>
+      <button class="rg-arr-btn rg-arr-check" id="rg-arr-check">✓ Check</button>
+    </div>
+  </div>
+
+  <!-- Quick Pick panel -->
+  <div class="rg-panel" id="rg-qp-panel">
+    <div class="rg-arr-hud">
+      <span class="rg-arr-hud-item"><span class="rg-arr-label">PTS</span><span id="rg-qp-pts">0</span></span>
+      <span class="rg-arr-hud-item"><span class="rg-arr-label">STREAK</span><span id="rg-qp-streak">0</span></span>
+      <span class="rg-arr-hud-item"><span class="rg-arr-label">BEST</span><span id="rg-qp-best">0</span></span>
+    </div>
+    <div class="rg-qp-line-wrap"><div class="rg-qp-line" id="rg-qp-line"></div></div>
+    <div class="rg-qp-timer-wrap"><div class="rg-qp-timer" id="rg-qp-timer-bar"></div></div>
+    <div id="rg-qp-options"></div>
+    <div id="rg-qp-feedback"></div>
+  </div>
+
 
   <!-- game surface -->
   <div id="rg-hud">
@@ -1286,7 +1413,6 @@ const store = {
     try{ localStorage.removeItem('laulupaja:'+k) }catch(e){ delete memStore[k] }
   }
 };
-
 
 // ═══════ FINNISH MORPHOLOGY ENGINE (MCE / Voikko WASM — offline, no API key) ═══════
 // Replaces the Gemini analysis for the Finnish edition. All morphology (verb
@@ -1486,7 +1612,6 @@ function analyzeSongMCE(verses, transVerses){
   });
   return outVerses;
 }
-
 
 // ═══════ TOAST & STAMP ═══════
 let toastT=null;
@@ -1749,7 +1874,9 @@ function showPetalPopup(meta){
   const delBtn = document.createElement('button'); delBtn.className='pp-del'; delBtn.textContent='✕ Delete';
   delBtn.addEventListener('click', async ()=>{
     songsIndex = songsIndex.filter(m=>m.id!==meta.id);
-    await saveIndex(); await store.del('song:'+meta.id);
+    await saveIndex();
+    try{ await adbDel(audioKeyFor(meta.id)); }catch(e){}
+    await store.del('song:'+meta.id);
     const prog = await loadGardenProgress(); delete prog[meta.id]; await store.set('garden-progress',prog);
     renderHome();
   });
@@ -2095,7 +2222,7 @@ async function aggregateVerbs(){
         const songKey = (meta.title||'').trim().toLowerCase();
         if(line.text && !verbs[key].seen.has(songKey)){
           verbs[key].seen.add(songKey);
-          verbs[key].sentences.push({ text:line.text, surface:vb.surface, song:meta.title, english:line.english||'', roman:line.roman||null, videoId:s.videoId||null, start:line.start, end:line.end });
+          verbs[key].sentences.push({ text:line.text, surface:vb.surface, song:meta.title, english:line.english||'', roman:line.roman||null, videoId:s.videoId||null, audioKey:s.audioKey||null, start:line.start, end:line.end });
         }
       });
     }));
@@ -2163,13 +2290,24 @@ async function renderLibrary(){
 // ── Library Quiz — 9 types with YouTube audio support ──
 // Play quiz audio: prefer YouTube segment, fallback to TTS
 let _quizVideoId = null;
-function playQuizAudio(text, videoId, start, end, cb){
+function playQuizAudio(text, videoId, start, end, cb, audioKey){
   stopAudio(); // stop any playing segment/TTS first
+  // Uploaded-audio songs: load the blob, then play the segment via AUD.
+  if(audioKey && start!=null && end!=null){
+    if(fileState==='ready' && fileLoadedKey===audioKey){ playSegment(start, end, cb); return; }
+    adbGet(audioKey).then(blob=>{
+      if(!blob){ speakFi(text, cb); return; }
+      fileAttach(blob, audioKey).then(ok=>{
+        if(ok) playSegment(start, end, cb); else speakFi(text, cb);
+      });
+    }).catch(()=>speakFi(text, cb));
+    return;
+  }
   if(videoId && start!=null && end!=null && ytState!=='failed'){
     const play = ()=> playSegment(start, end, cb);
     if(ytState==='ready'){
       if(_quizVideoId===videoId){ play(); return; }
-      _quizVideoId = videoId;
+      _quizVideoId = videoId; ytLoadedId = videoId;
       try{ ytPlayer.loadVideoById({videoId, startSeconds:start}); }
       catch(e){ speakFi(text, cb); return; }
       setTimeout(play, 500); // brief delay for the video switch to take effect
@@ -2185,9 +2323,9 @@ function playQuizAudio(text, videoId, start, end, cb){
   speakFi(text, cb); // no video data (or YT unavailable) → TTS fallback
 }
 // Shorthand for quiz items (Library Quiz pool items have videoId/start/end directly)
-function playItemAudio(item, cb){ playQuizAudio(item.line, item.videoId, item.start, item.end, cb); }
+function playItemAudio(item, cb){ playQuizAudio(item.line, item.videoId, item.start, item.end, cb, item.audioKey); }
 // Shorthand for Daily Challenge items (line object has start/end, songObj has videoId)
-function playChLineAudio(line, songObj, cb){ playQuizAudio(line.text, songObj&&songObj.videoId, line.start, line.end, cb); }
+function playChLineAudio(line, songObj, cb){ playQuizAudio(line.text, songObj&&songObj.videoId, line.start, line.end, cb, songObj&&songObj.audioKey); }
 // No dictionary/inflected-form questions: every item is grounded in a real lyric line.
 let lqItems=[], lqIdx=0, lqScore=0, lqTotal=10, lqLocked=false;
 
@@ -2198,7 +2336,7 @@ async function buildQuizPool(){
   verbs.forEach(v=>{
     (v.sentences||[]).forEach(s=>{
       if(!s.text || !s.surface) return;
-      pool.push({ word:s.surface, line:s.text, english:s.english||'', roman:s.roman||null, song:s.song, videoId:s.videoId||null, start:s.start, end:s.end });
+      pool.push({ word:s.surface, line:s.text, english:s.english||'', roman:s.roman||null, song:s.song, videoId:s.videoId||null, audioKey:s.audioKey||null, start:s.start, end:s.end });
     });
   });
   // Enrich pool with nextLine for chain_recall (consecutive line pairs)
@@ -2463,7 +2601,7 @@ function qChainRecall(quiz, item){
   quiz.appendChild(prompt);
   setTimeout(()=>playItemAudio(item), 350);
   // the answer is the NEXT line — play its own YouTube segment on reveal
-  const nextItem = { line:item.nextLine.text, videoId:item.videoId, start:item.nextLine.start, end:item.nextLine.end };
+  const nextItem = { line:item.nextLine.text, videoId:item.videoId, audioKey:item.audioKey||null, start:item.nextLine.start, end:item.nextLine.end };
   renderSpeakQuiz(quiz, item.nextLine.text, { longForm:true, maxMs:8000, revealText:item.nextLine.text, audioItem:nextItem });
 }
 
@@ -2598,6 +2736,25 @@ async function saveTranslations(){
 
 async function saveSong(){
   if(!song.id) song.id = uid();
+  // Uploaded audio: write the blob to IndexedDB and pin the key to this song id.
+  if(song.audioKey || pickedAudioFile){
+    if(pickedAudioFile){
+      const key = audioKeyFor(song.id);
+      try{
+        await adbPut(key, pickedAudioFile);
+        song.audioKey = key;
+        song.videoId = null;
+        // the newly stored blob is the live source
+        fileState='unloaded'; fileLoadedKey=null;
+      }catch(e){
+        song.audioKey = null;
+        toast('Could not store the audio file — spoken audio will be used');
+      }
+      pickedAudioFile = null;
+    } else if(song.audioKey === '__pending__'){
+      song.audioKey = null; // intent without a file
+    }
+  }
   await store.set('song:'+song.id, song);
   await loadIndex();
   const meta = songsIndex.find(m=>m.id===song.id);
@@ -2656,7 +2813,7 @@ async function renderCommunityScreen(){
 async function importCommunitySong(entry){
   const localSong = {
     id: null, title: entry.title, language:'Finnish', bcp47: entry.bcp47 || 'fi-FI',
-    rtl:false, nonLatin:false, videoId: entry.videoId,
+    rtl:false, nonLatin:false, videoId: entry.videoId, audioKey: null,
     verses: (entry.verses||[]).map(vs=>({
       lines: (vs.lines||[]).map(l=>({
         text: l.text, roman:null, english:'',
@@ -2683,7 +2840,7 @@ function songWordCount(s){
 
 function buildSharePayload(s){
   return {
-    title: s.title, videoId: s.videoId, bcp47: s.bcp47 || 'fi-FI',
+    title: s.title, videoId: s.videoId || null, bcp47: s.bcp47 || 'fi-FI',
     verses: s.verses.map(vs=>({
       lines: vs.lines.map(l=>({
         text: l.text, start: l.start, end: l.end,
@@ -2756,6 +2913,45 @@ function sleep(ms){ return new Promise(r=>setTimeout(r,ms)); }
 
 let importState = null; // {title, verses:[[lines]], transVerses|null, videoId, editingId}
 let editingSongId = null; // set when re-editing an existing song
+let importSrc = 'yt';     // 'yt' | 'file' — chosen once, at import
+let pickedAudioFile = null; // File chosen this import session (null = keep existing)
+
+function setImportSrc(which){
+  importSrc = which;
+  const yt = which==='yt';
+  $('src-tab-yt').classList.toggle('active', yt);
+  $('src-tab-file').classList.toggle('active', !yt);
+  $('src-pane-yt').classList.toggle('hidden', !yt);
+  $('src-pane-file').classList.toggle('hidden', yt);
+}
+// Source is chosen once, at import. When re-editing an existing song the
+// chooser is locked to the source that song already uses.
+function lockImportSrc(locked){
+  ['src-tab-yt','src-tab-file'].forEach(id=>{
+    const b=$(id); if(!b) return;
+    b.disabled = locked;
+    b.style.opacity = locked ? .5 : 1;
+    b.style.cursor = locked ? 'not-allowed' : 'pointer';
+    b.title = locked ? 'The audio source is fixed when a song is first imported' : '';
+  });
+}
+function fmtBytes(n){
+  if(n < 1024) return n+' B';
+  if(n < 1024*1024) return (n/1024).toFixed(0)+' KB';
+  return (n/(1024*1024)).toFixed(1)+' MB';
+}
+function onAudioPicked(file){
+  const info = $('audio-pick-info');
+  if(!file){ pickedAudioFile=null; info.className='f-hint'; info.textContent=''; return; }
+  if(!/^audio\//.test(file.type||'') && !/\.(mp3|m4a|aac|ogg|oga|opus|wav|flac|weba|webm)$/i.test(file.name||'')){
+    pickedAudioFile=null; info.className='f-hint bad';
+    info.textContent = 'That does not look like an audio file.';
+    return;
+  }
+  pickedAudioFile = file;
+  info.className='f-hint ok';
+  info.textContent = `✓ ${file.name} · ${fmtBytes(file.size)}`;
+}
 
 // ── text normalization: lowercase + strip all punctuation/special chars ──
 // keeps letters (any script), combining marks, digits, spaces
@@ -2794,6 +2990,9 @@ function beginImport(){
   editingSongId = null;
   $('in-title').value=''; $('in-lyrics').value=''; $('in-trans').value='';
   $('in-video').value='';
+  $('in-audio').value=''; onAudioPicked(null);
+  setImportSrc('yt');
+  lockImportSrc(false);
   showScreen('import-screen');
 }
 
@@ -2814,7 +3013,15 @@ async function analyze(){
       verses.forEach(v=>{ transVerses.push(flat.slice(p, p+v.length)); p+=v.length; });
     }
   }
-  importState = { title, verses, transVerses, videoId: parseVideoId($('in-video').value.trim()), editingId: editingSongId };
+  // Source is fixed at import: exactly one of videoId / audio file is carried forward.
+  const useFile = (importSrc==='file');
+  const keepExistingAudio = useFile && !pickedAudioFile && !!(editingSongId && song && song.audioKey);
+  if(useFile && !pickedAudioFile && !keepExistingAudio){
+    toast('Choose an audio file, or switch to the YouTube tab'); return;
+  }
+  importState = { title, verses, transVerses,
+    videoId: useFile ? null : parseVideoId($('in-video').value.trim()),
+    useFile, keepExistingAudio, editingId: editingSongId };
   runAnalysis();
 }
 
@@ -2831,7 +3038,7 @@ async function runAnalysis(){
   showScreen('analyze-screen');
   $('analyze-err').style.display='none';
   $('analyze-retry-row').style.display='none';
-  const { title, verses, transVerses, videoId } = importState;
+  const { title, verses, transVerses, videoId, useFile, keepExistingAudio } = importState;
   try{
     // Load the offline morphology engine (cached after first import).
     if(!MCE.ready){
@@ -2847,6 +3054,14 @@ async function runAnalysis(){
       language:langHint.language, bcp47:langHint.bcp47,
       rtl:langHint.rtl, nonLatin:langHint.nonLatin,
       videoId, verses: outVerses };
+    if(useFile){
+      // audioKey is assigned on save (needs the song id); mark the intent now
+      song.audioKey = (keepExistingAudio && song.id) ? audioKeyFor(song.id)
+                    : (song.id ? audioKeyFor(song.id) : '__pending__');
+      song.videoId = null;
+    } else {
+      song.audioKey = null;
+    }
     renderReview();
   }catch(err){
     $('analyze-err').textContent = 'Analysis failed: ' + err.message +
@@ -2914,12 +3129,142 @@ function validateReview(){
   return true;
 }
 
+
+// ═══════ AUDIO BLOB STORE (IndexedDB) — uploaded song audio ═══════
+// Blobs are stored natively (no base64 inflation). Keyed by song id.
+const ADB_NAME='laulupaja-audio', ADB_STORE='blobs';
+let _adb=null;
+function adbOpen(){
+  if(_adb) return Promise.resolve(_adb);
+  return new Promise((res,rej)=>{
+    if(!window.indexedDB){ rej(new Error('no-idb')); return; }
+    let rq;
+    try{ rq = indexedDB.open(ADB_NAME, 1); }catch(e){ rej(e); return; }
+    rq.onupgradeneeded = ()=>{ const db=rq.result;
+      if(!db.objectStoreNames.contains(ADB_STORE)) db.createObjectStore(ADB_STORE); };
+    rq.onsuccess = ()=>{ _adb=rq.result; res(_adb); };
+    rq.onerror = ()=>rej(rq.error||new Error('idb-open'));
+  });
+}
+function adbPut(key, blob){
+  return adbOpen().then(db=>new Promise((res,rej)=>{
+    const tx=db.transaction(ADB_STORE,'readwrite');
+    tx.objectStore(ADB_STORE).put(blob, key);
+    tx.oncomplete=()=>res(true); tx.onerror=()=>rej(tx.error||new Error('idb-put'));
+  }));
+}
+function adbGet(key){
+  return adbOpen().then(db=>new Promise((res,rej)=>{
+    const tx=db.transaction(ADB_STORE,'readonly');
+    const rq=tx.objectStore(ADB_STORE).get(key);
+    rq.onsuccess=()=>res(rq.result||null); rq.onerror=()=>rej(rq.error||new Error('idb-get'));
+  }));
+}
+function adbDel(key){
+  return adbOpen().then(db=>new Promise((res)=>{
+    const tx=db.transaction(ADB_STORE,'readwrite');
+    tx.objectStore(ADB_STORE).delete(key);
+    tx.oncomplete=()=>res(true); tx.onerror=()=>res(false);
+  })).catch(()=>false);
+}
+const audioKeyFor = id => 'audio:'+id;
+
+// ═══════ AUD — PLAYBACK FACADE (YouTube iframe ⟷ uploaded <audio>) ═══════
+// Every playback call site goes through AUD. Source is fixed per song at import:
+// song.audioKey → local file;  song.videoId → YouTube.
+let fileEl=null;            // HTMLAudioElement for uploaded audio
+let fileUrl=null;           // object URL currently attached
+let fileState='unloaded';   // unloaded|loading|ready|failed
+let fileLoadedKey=null;
+
+function fileAudioEl(){
+  if(!fileEl){
+    fileEl = document.createElement('audio');
+    fileEl.preload='auto';
+    fileEl.playsInline=true;
+    fileEl.setAttribute('playsinline','');
+    const host=$('yt-wrap');
+    if(host) host.appendChild(fileEl);
+  }
+  return fileEl;
+}
+// Attach a Blob (or object URL) to the <audio> element and wait for metadata.
+function fileAttach(blob, key){
+  return new Promise(res=>{
+    const el=fileAudioEl();
+    try{ if(fileUrl) URL.revokeObjectURL(fileUrl); }catch(e){}
+    fileUrl = URL.createObjectURL(blob);
+    fileState='loading';
+    const ok=()=>{ cleanup(); fileState='ready'; fileLoadedKey=key; res(true); };
+    const bad=()=>{ cleanup(); fileState='failed'; res(false); };
+    const cleanup=()=>{ el.removeEventListener('loadedmetadata',ok); el.removeEventListener('error',bad); clearTimeout(tm); };
+    const tm=setTimeout(bad, 15000);
+    el.addEventListener('loadedmetadata',ok);
+    el.addEventListener('error',bad);
+    el.src=fileUrl;
+    try{ el.load(); }catch(e){}
+  });
+}
+// True when the active song plays from an uploaded file.
+function usingFile(s){ const t = s || (typeof song!=='undefined' ? song : null); return !!(t && t.audioKey); }
+
+const AUD = {
+  // which backend the current song uses
+  isFile(){ return usingFile(); },
+  // is the backend ready to play?
+  ready(){ return usingFile() ? fileState==='ready' : ytState==='ready'; },
+  failed(){ return usingFile() ? fileState==='failed' : ytState==='failed'; },
+  now(){
+    if(usingFile()){ try{ return fileEl ? fileEl.currentTime : 0; }catch(e){ return 0; } }
+    try{ return ytPlayer.getCurrentTime(); }catch(e){ return 0; }
+  },
+  duration(){
+    if(usingFile()){ try{ return (fileEl && isFinite(fileEl.duration)) ? fileEl.duration : 0; }catch(e){ return 0; } }
+    try{ return ytPlayer.getDuration(); }catch(e){ return 0; }
+  },
+  seek(t){
+    if(usingFile()){ try{ fileAudioEl().currentTime = Math.max(0,t); }catch(e){} return; }
+    try{ ytPlayer.seekTo(Math.max(0,t), true); }catch(e){}
+  },
+  play(){
+    if(usingFile()){ try{ const pr=fileAudioEl().play(); if(pr&&pr.catch) pr.catch(()=>{}); }catch(e){} return; }
+    try{ ytPlayer.playVideo(); }catch(e){}
+  },
+  pause(){
+    if(usingFile()){ try{ fileAudioEl().pause(); }catch(e){} return; }
+    try{ AUD.pause(); }catch(e){}
+  },
+  rate(r){
+    if(usingFile()){ try{ fileAudioEl().playbackRate = r; }catch(e){} return; }
+    try{ if(ytPlayer.setPlaybackRate) ytPlayer.setPlaybackRate(r); }catch(e){}
+  },
+  // Load the audio source for song `s`. cb(ok).
+  load(s, cb){
+    if(usingFile(s)){
+      if(fileState==='ready' && fileLoadedKey===s.audioKey){ cb(true); return; }
+      adbGet(s.audioKey).then(blob=>{
+        if(!blob){ fileState='failed'; cb(false); return; }
+        fileAttach(blob, s.audioKey).then(cb);
+      }).catch(()=>{ fileState='failed'; cb(false); });
+      return;
+    }
+    if(!s || !s.videoId){ cb(false); return; }
+    loadYT(s.videoId, cb);
+  },
+  // Cue without autoplay (used when switching songs).
+  cue(s, cb){
+    if(usingFile(s)){ AUD.load(s, ok=>{ if(ok) AUD.pause(); if(cb) cb(ok); }); return; }
+    AUD.load(s, ok=>{ if(ok){ try{ AUD.pause(); }catch(e){} } if(cb) cb(ok); });
+  }
+};
+
 // ═══════ YOUTUBE — LOADER, SEGMENTS, TAP-ALONG TAGGER ═══════
 let ytPlayer=null, ytState='unloaded'; // unloaded|loading|ready|failed
+let ytLoadedId=null; // videoId currently loaded in the player
 let segTimer=null;
 
 function loadYT(videoId, cb){
-  if(ytState==='ready'){ ytPlayer.loadVideoById(videoId); cb(true); return }
+  if(ytState==='ready'){ ytPlayer.loadVideoById(videoId); ytLoadedId=videoId; cb(true); return }
   if(ytState==='failed'){ cb(false); return }
   ytState='loading';
   const fail = ()=>{ if(ytState!=='ready'){ ytState='failed'; cb(false); } };
@@ -2929,7 +3274,7 @@ function loadYT(videoId, cb){
       ytPlayer = new YT.Player('yt-player', {
         videoId, playerVars:{ playsinline:1, rel:0 },
         events:{
-          onReady:()=>{ clearTimeout(t); ytState='ready'; cb(true); },
+          onReady:()=>{ clearTimeout(t); ytState='ready'; ytLoadedId=videoId; cb(true); },
           onError:()=>{ clearTimeout(t); fail(); }
         }
       });
@@ -2941,13 +3286,13 @@ function loadYT(videoId, cb){
   document.head.appendChild(s);
 }
 function stopSegment(){ clearInterval(segTimer); segTimer=null;
-  if(ytState==='ready'){ try{ ytPlayer.pauseVideo() }catch(e){} } }
+  if(AUD.ready()){ try{ AUD.pause() }catch(e){} } }
 function playSegment(start, end, onend){
   stopSegment(); stopTTS();
   try{
-    ytPlayer.seekTo(Math.max(0,start), true); ytPlayer.playVideo();
+    AUD.seek(start); AUD.play();
     segTimer = setInterval(()=>{
-      try{ if(ytPlayer.getCurrentTime() >= end){ stopSegment(); if(onend) onend(); } }
+      try{ if(AUD.now() >= end){ stopSegment(); if(onend) onend(); } }
       catch(e){ stopSegment(); if(onend) onend(); }
     }, 100);
   }catch(e){ if(onend) onend(); }
@@ -2977,16 +3322,24 @@ function startTagger(fresh){
     tagIdx = tagFlat.length+1;
     $('tag-done-btn').classList.remove('hidden');
   }
-  $('tag-btn').disabled=true; $('tag-btn').textContent='Loading video…';
+  const _fileSrc = usingFile(song);
+  $('tag-btn').disabled=true; $('tag-btn').textContent = _fileSrc ? 'Loading audio…' : 'Loading video…';
+  if(_fileSrc){ $('yt-wrap').classList.add('audio-only'); } else { $('yt-wrap').classList.remove('audio-only'); }
   renderTagCur();
-  loadYT(song.videoId, ok=>{
+  AUD.load(song, ok=>{
     if(ok){
+      if(_fileSrc){ const el=fileAudioEl(); el.controls=true; el.classList.add('file-audio-visible'); }
       if(tagIdx > tagFlat.length){ $('tag-btn').disabled=true; $('tag-btn').textContent='All tagged ✓'; }
       else { $('tag-btn').disabled=false; $('tag-btn').textContent='⏺ Line starts now'; }
     }
     else{
-      $('yt-wrap').innerHTML = '<div id="yt-unavailable">Video can\'t load in this environment (it will work in the standalone build). Spoken audio will be used instead.</div>';
-      $('tag-btn').disabled=true; $('tag-btn').textContent='Video unavailable';
+      if(_fileSrc){
+        $('tag-btn').disabled=true; $('tag-btn').textContent='Audio unavailable';
+        toast('Audio file missing — re-import the song to attach it again');
+      } else {
+        $('yt-wrap').innerHTML = '<div id="yt-unavailable">Video can\'t load in this environment (it will work in the standalone build). Spoken audio will be used instead.</div>';
+        $('tag-btn').disabled=true; $('tag-btn').textContent='Video unavailable';
+      }
     }
   });
 }
@@ -3038,8 +3391,8 @@ function addEndRow(){
   $('tag-list').appendChild(row);
 }
 function tagTap(){
-  if(ytState!=='ready') return;
-  let t; try{ t = ytPlayer.getCurrentTime() }catch(e){ return }
+  if(!AUD.ready()) return;
+  let t; try{ t = AUD.now() }catch(e){ return }
   tagTimes[tagIdx] = t;
   if(tagIdx < tagFlat.length) addTagRow(tagIdx);
   tagIdx++;
@@ -3073,7 +3426,7 @@ function stopAudio(){
   if(curPlayBtn){ curPlayBtn.classList.remove('playing'); curPlayBtn=null; }
   if(!suppressVerseReset && typeof versePlaying!=='undefined' && versePlaying) setVerseBtn(false);
 }
-function hasVideoFor(line){ return ytState==='ready' && line.start!=null && line.end!=null; }
+function hasVideoFor(line){ return AUD.ready() && line.start!=null && line.end!=null; }
 function playLine(line, btn, onend){
   stopAudio();
   if(btn){ curPlayBtn=btn; btn.classList.add('playing'); }
@@ -4362,13 +4715,27 @@ function startGame(){
   $('song-title-lbl').textContent = song.title + ' · ' + song.language;
   showScreen('game-screen');
   updateSharePill();
-  if(song.videoId && ytState==='unloaded'){
-    // load in background; playLine() checks availability live, so no restart needed
-    loadYT(song.videoId, ok=>{ if(!ok) toast('Video unavailable here — using spoken audio'); });
+  if(usingFile(song)){
+    // uploaded audio: load the blob from IndexedDB in the background
+    if(!(fileState==='ready' && fileLoadedKey===song.audioKey)){
+      AUD.load(song, ok=>{ if(!ok) toast('Audio file missing — using spoken audio'); });
+    }
+  } else if(song.videoId){
+    if(ytState==='unloaded'){
+      // load in background; playLine() checks availability live, so no restart needed
+      loadYT(song.videoId, ok=>{ if(!ok) toast('Video unavailable here — using spoken audio'); });
+    } else if(ytState==='ready' && ytLoadedId !== song.videoId){
+      // different song chosen — swap the video (cue = no autoplay)
+      try{
+        ytPlayer.cueVideoById(song.videoId);
+        ytLoadedId = song.videoId;
+        _quizVideoId = song.videoId;
+      }catch(e){ /* playLine falls back to TTS if the cue failed */ }
+    }
   }
   startVerse();
+  rgUpdateWinBtn();
 }
-
 
 // ═══════ RHYTHM BONUS (rg-) — post-Recite arcade mode ═══════
 // Syncs to the real YouTube recording; internal clock fallback.
@@ -4482,7 +4849,7 @@ function rgBuildData(){
 }
 function rgUpdateWinBtn(){
   const b=$('win-rhythm-btn'); if(!b) return;
-  b.classList.toggle('hidden', !rgBuildData());
+  b.classList.toggle('hidden', !song);
 }
 
 // ── Engine config ──
@@ -4495,6 +4862,7 @@ const RG_SC={perfect:1,good:1,ok:1,miss:0};
 // ── Engine state ──
 let rgData=null, rgRun=false, rgRAF=null, rgVideo=false, rgRate=1;
 let rgBase=0, rgReal0=0, rgMode='tiles';
+let rgTileEasy=true;  // easy=syllables in order, hard=shuffled
 let rgScoreV=0, rgComboV=0, rgMaxCombo=0, rgWrong=0;
 let rgCounts={perfect:0,good:0,ok:0,miss:0};
 let rgPtr=0, rgChunk=-1, rgSlots=[], rgWords=[], rgWordPtr=0;
@@ -4504,7 +4872,7 @@ const RG_TIERS={tiles:[3,6,9,12,15], tap:[10,25,50,75,100]};
 const RG_AHEAD=3.0, RG_FORCE=1.2, RG_MAXVIS=5;
 
 function rgNow(){
-  if(rgVideo){ try{ return ytPlayer.getCurrentTime(); }catch(e){ return 0; } }
+  if(rgVideo){ try{ return AUD.now(); }catch(e){ return 0; } }
   return rgBase + (performance.now()-rgReal0)/1000*rgRate;
 }
 function rgAudio(){ if(!rgACtx){ try{ rgACtx=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} }
@@ -4553,7 +4921,7 @@ function rgRipple(x,y,color,big){
   setTimeout(()=>r.remove(), big?950:750);
 }
 function rgConfetti(grand){
-  const colors=['#06b6d4','#e879f9','#fbbf24','#34d399','#f8fafc','#60a5fa'];
+  const colors=['#77D970','#FF5F9E','#fbbf24','#17B978','#f8fafc','#B4AEE8'];
   const n=grand?150:55;
   const cx=window.innerWidth/2, cy=window.innerHeight*0.35;
   for(let i=0;i<n;i++){
@@ -4601,7 +4969,7 @@ function rgPulse(){
 }
 function rgFlashTxt(j,x,y){
   const el=document.createElement('div'); el.className='rg-tf';
-  el.style.color={perfect:'#fbbf24',good:'#34d399',ok:'#60a5fa',miss:'#f87171'}[j];
+  el.style.color={perfect:'#fbbf24',good:'#17B978',ok:'#B4AEE8',miss:'#E90064'}[j];
   el.textContent={perfect:'PERFECT',good:'GOOD',ok:'OK',miss:'MISS'}[j];
   el.style.left=x+'px';el.style.top=y+'px';el.style.transform='translateX(-50%)';
   document.body.appendChild(el); setTimeout(()=>el.remove(),550);
@@ -4712,8 +5080,8 @@ function rgReleaseWord(wIdx){
 function rgVisibleCount(){ return rgData.all.filter(s=>s.el && !s.resolved).length; }
 function rgSpawnWord(W){
   const area=$('rg-area');
-  // shuffled display order within the word
-  const perm=W.map((_,i)=>i); shuffle(perm);
+  // display order: easy=sequential, hard=shuffled
+  const perm=W.map((_,i)=>i); if(!rgTileEasy) shuffle(perm);
   const order=W.map((s,i)=>({s,d:perm[i]})).sort((a,b)=>a.d-b.d);
 
   // sizing plan: normal → compact → two-row compact block
@@ -4870,12 +5238,12 @@ function rgTapAlong(){
   const early=s.time-now;
   if(early > 0.35){ // before the syllable's window opens
     rgTone('wrong'); rgComboV=0; rgHud();
-    rgRipple(bx,by,'#f87171',false);
+    rgRipple(bx,by,'#E90064',false);
     return;
   }
   const dMs=Math.abs(now-s.time)*1000;
   const j = dMs<=200 ? 'perfect' : 'good'; // anywhere in the sung span = good
-  const col={perfect:'#fbbf24',good:'#34d399'}[j];
+  const col={perfect:'#fbbf24',good:'#17B978'}[j];
   rgRipple(bx,by,col,j==='perfect');
   if(j==='perfect'){
     big.classList.remove('bigpulse'); void big.offsetWidth; big.classList.add('bigpulse');
@@ -4932,7 +5300,7 @@ function rgFly(s,j){
   const slot=rgSlots[s.ord];
   if(!slot){ return; }
   const from=s.el.getBoundingClientRect(), to=slot.getBoundingClientRect();
-  const col={perfect:'#fbbf24',good:'#34d399',ok:'#60a5fa'}[j];
+  const col={perfect:'#fbbf24',good:'#17B978',ok:'#B4AEE8'}[j];
   const c=document.createElement('div'); c.className='rg-fly';
   c.textContent=s.t;
   c.style.border='1.5px solid '+col; c.style.color=col;
@@ -5026,8 +5394,9 @@ function rgOpen(){
   rgLoadBests();
 }
 function rgShowPanel(id){
-  ['rg-start-panel','rg-refine-panel','rg-results-panel'].forEach(p=>
-    $(p).classList.toggle('open', p===id));
+  ['rg-start-panel','rg-refine-panel','rg-results-panel','rg-arrange-panel','rg-qp-panel'].forEach(p=>{
+    const el=$(p); if(el) el.classList.toggle('open', p===id);
+  });
 }
 function rgStartRun(mode){
   rgAudio();
@@ -5057,11 +5426,11 @@ function rgStartRun(mode){
   $('rg-assembly').style.display = rgMode==='tap' ? 'none' : 'flex';
   if(rgMode==='tap'){ rgLineRender(); }
   // arm: cue the video (paused) at the pre-roll point; player presses ▶ when ready
-  rgVideo = !!(ytState==='ready' && song.videoId);
+  rgVideo = !!(AUD.ready() && (song.videoId || song.audioKey));
   if(rgVideo){
     try{
-      ytPlayer.seekTo(Math.max(0,rgData.t0-3), true);
-      ytPlayer.pauseVideo();
+      AUD.seek(Math.max(0,rgData.t0-3));
+      AUD.pause();
     }catch(e){ rgVideo=false; }
   }
   // position timeline at the armed point
@@ -5075,8 +5444,8 @@ function rgGo(){
   if(rgPaused){ rgCountdown(()=>rgResume()); return; }
   if(rgVideo){
     try{
-      if(ytPlayer.setPlaybackRate) ytPlayer.setPlaybackRate(rgRate);
-      ytPlayer.playVideo();
+      AUD.rate(rgRate);
+      AUD.play();
     }catch(e){ rgVideo=false; }
   }
   if(!rgVideo){ rgBase=rgData.t0-3; rgReal0=performance.now(); }
@@ -5090,7 +5459,7 @@ function rgPauseGame(){
   rgRun=false; rgPaused=true;
   if(rgRAF) cancelAnimationFrame(rgRAF);
   rgPauseT=rgNow();
-  if(rgVideo){ try{ ytPlayer.pauseVideo(); }catch(e){} }
+  if(rgVideo){ try{ AUD.pause(); }catch(e){} }
   $('rg-pause').classList.remove('show');
   $('rg-lasers').classList.remove('show');
   $('rg-play').classList.add('show');
@@ -5107,7 +5476,7 @@ function rgCountdown(done){
 }
 function rgResume(){
   if(rgVideo){
-    try{ if(ytPlayer.setPlaybackRate) ytPlayer.setPlaybackRate(rgRate); ytPlayer.playVideo(); }catch(e){}
+    try{ AUD.rate(rgRate); AUD.play(); }catch(e){}
   } else {
     rgBase=rgPauseT; rgReal0=performance.now();
   }
@@ -5122,14 +5491,15 @@ function rgStop(){
   $('rg-count').classList.remove('show');
   $('rg-lasers').classList.remove('show');
   if(rgRAF) cancelAnimationFrame(rgRAF);
-  if(rgVideo){ try{ ytPlayer.pauseVideo(); if(ytPlayer.setPlaybackRate) ytPlayer.setPlaybackRate(1);}catch(e){} }
+  if(rgVideo){ try{ AUD.pause(); AUD.rate(1); }catch(e){} }
 }
 async function rgSaveScore(finalScore){
   const all=(await store.get('rg-scores-v2'))||{};
   const sid=song.id||song.title;
   if(!all[sid]) all[sid]={};
-  if(!all[sid][rgMode]) all[sid][rgMode]={hist:[],best:0};
-  const e=all[sid][rgMode];
+  const scoreKey = (rgMode==='tiles' && rgTileEasy) ? 'tiles-easy' : rgMode;
+  if(!all[sid][scoreKey]) all[sid][scoreKey]={hist:[],best:0};
+  const e=all[sid][scoreKey];
   const isHigh = finalScore>e.best;
   const hadPrevious = e.hist.length>0;
   e.hist.unshift(finalScore);
@@ -5144,7 +5514,13 @@ async function rgLoadBests(){
     const sid=song.id||song.title;
     const d=all[sid]||{};
     $('rg-best-tap').textContent = d.tap&&d.tap.best ? 'Best: '+d.tap.best.toLocaleString() : '';
-    $('rg-best-tiles').textContent = d.tiles&&d.tiles.best ? 'Best: '+d.tiles.best.toLocaleString() : '';
+    const tKey = rgTileEasy ? 'tiles-easy' : 'tiles';
+    const tData = d[tKey];
+    $('rg-best-tiles').textContent = tData&&tData.best ? 'Best: '+tData.best.toLocaleString() : '';
+    const arrB = $('rg-best-arrange');
+    if(arrB) arrB.textContent = d.arrange&&d.arrange.best ? 'Best: '+d.arrange.best.toLocaleString() : '';
+    const qpB = $('rg-best-quickpick');
+    if(qpB) qpB.textContent = d.quickpick&&d.quickpick.best ? 'Best: '+d.quickpick.best.toLocaleString() : '';
   }catch(e){}
 }
 async function rgFinish(){
@@ -5175,6 +5551,8 @@ async function rgFinish(){
     $('rg-hist').innerHTML='Recent: '+e.hist.map(s=>s.toLocaleString()).join(' · ')
       +' &nbsp;|&nbsp; <b>Best: '+e.best.toLocaleString()+'</b>';
   } else { $('rg-hist').textContent=''; }
+  const _br=document.querySelector('#rg-results-panel .rg-break');
+  if(_br) _br.style.display='';   // restore breakdown (word games hide it)
   rgShowPanel('rg-results-panel');
   rgConfetti(grand);
 }
@@ -5191,14 +5569,14 @@ function rgClose(){
 // ── Refine pass: tap syllable onsets against the real recording ──
 let rgRefTimes=[], rgRefLi=0, rgRefSi=0, rgRefFlat=[], rgRefSyls=[];
 function rgRefineStart(){
-  if(ytState!=='ready' || !song.videoId){ toast('Refining needs the video loaded'); return; }
+  if(!AUD.ready() || !(song.videoId||song.audioKey)){ toast('Refining needs the audio loaded'); return; }
   rgRefFlat=rgFlatLines();
   rgRefSyls=rgRefFlat.map(l=>rgSylTexts(l.text));
   rgRefTimes=rgRefFlat.map(()=>[]);
   rgRefLi=0; rgRefSi=0;
   rgShowPanel('rg-refine-panel');
   rgRefRender();
-  try{ ytPlayer.seekTo(Math.max(0,rgRefFlat[0].start-1.5),true); ytPlayer.playVideo(); }catch(e){}
+  try{ AUD.seek(Math.max(0,rgRefFlat[0].start-1.5)); AUD.play(); }catch(e){}
 }
 function rgRefRender(){
   $('rg-ref-prog').textContent='Line '+(rgRefLi+1)+' / '+rgRefFlat.length;
@@ -5209,7 +5587,7 @@ function rgRefRender(){
 }
 function rgRefTap(){
   if(ytState!=='ready') return;
-  let t; try{ t=ytPlayer.getCurrentTime(); }catch(e){ return; }
+  let t; try{ t=AUD.now(); }catch(e){ return; }
   rgAudio(); rgSnare();
   rgRefTimes[rgRefLi][rgRefSi]=t;
   rgRefSi++;
@@ -5218,13 +5596,13 @@ function rgRefTap(){
     if(rgRefLi>=rgRefFlat.length){ rgRefDone(); return; }
     const nxt=rgRefFlat[rgRefLi];
     if(nxt.start!=null && nxt.start-t>2.5){
-      try{ ytPlayer.seekTo(Math.max(0,nxt.start-1),true); }catch(e){}
+      try{ AUD.seek(Math.max(0,nxt.start-1)); }catch(e){}
     }
   }
   rgRefRender();
 }
 async function rgRefDone(){
-  try{ ytPlayer.pauseVideo(); }catch(e){}
+  try{ AUD.pause(); }catch(e){}
   song.rhythm={v:1, syl:rgRefTimes};
   await saveSong();
   toast('Rhythm refined ✓');
@@ -5240,24 +5618,426 @@ function rgRefBack(){
   }
   rgRefRender();
   const L=rgRefFlat[rgRefLi];
-  try{ ytPlayer.seekTo(Math.max(0,L.start-1),true); ytPlayer.playVideo(); }catch(e){}
+  try{ AUD.seek(Math.max(0,L.start-1)); AUD.play(); }catch(e){}
 }
 function rgRefRestart(){
   rgRefTimes[rgRefLi]=[]; rgRefSi=0; rgRefRender();
   const L=rgRefFlat[rgRefLi];
-  try{ ytPlayer.seekTo(Math.max(0,L.start-1),true); ytPlayer.playVideo(); }catch(e){}
+  try{ AUD.seek(Math.max(0,L.start-1)); AUD.play(); }catch(e){}
 }
 function rgRefCancel(){
-  try{ ytPlayer.pauseVideo(); }catch(e){}
+  try{ AUD.pause(); }catch(e){}
   rgShowPanel('rg-start-panel');
 }
 
 // ── Rhythm wiring ──
 $('win-rhythm-btn').addEventListener('click', rgOpen);
 $('rg-close').addEventListener('click', rgClose);
+
+
+// Render the results panel for the word games, reusing the rhythm
+// results panel's real elements (rg-grade, rg-rscore, rg-hist, ...).
+// The per-judgment breakdown (Perfect/Good/OK/Miss) is rhythm-only,
+// so it's hidden for these games.
+function rgRenderResults(o){
+  const set=(id,txt)=>{ const el=$(id); if(el) el.textContent=txt; };
+  const hide=(id,yes)=>{ const el=$(id); if(el) el.style.display = yes?'none':''; };
+
+  set('rg-grade', o.grade);
+  const g=$('rg-grade'); if(g) g.className='rg-grade';
+  set('rg-rscore', o.score.toLocaleString());
+  set('rg-racc', o.accLine);
+  set('rg-mult', o.mathLine);
+  set('rg-rcombo', o.comboLine);
+  set('rg-rwrong', '');
+  set('rg-hist', 'Best: ' + o.best.toLocaleString());
+
+  // Perfect/Good/OK/Miss breakdown doesn't apply to word games
+  const br=document.querySelector('#rg-results-panel .rg-break');
+  if(br) br.style.display='none';
+
+  const nh=$('rg-newhigh');
+  if(nh) nh.style.display = o.isHigh ? 'block' : 'none';
+
+  rgShowPanel('rg-results-panel');
+}
+
+// ═══════════════════════════════════════════════════
+//  VERSE ARRANGE — drag lines into order, whole song
+// ═══════════════════════════════════════════════════
+let rgArr = null, rgArrRAF = null;
+let rgArrDragCard = null, rgArrDragPid = null;
+
+function rgArrFlatLines(){
+  if(!song || !song.verses) return [];
+  const out = [];
+  song.verses.forEach(v => v.lines.forEach(l => out.push(l)));
+  return out;
+}
+
+function rgArrStart(){
+  rgStop(); // stop any rhythm run
+  const flat = rgArrFlatLines();
+  if(!flat.length){ toast('Need a song with verses'); return; }
+  // Build verses from song data
+  const verses = song.verses.filter(v => v.lines && v.lines.length > 0);
+  if(!verses.length) return;
+
+  rgArr = { verses, verseIdx:0, points:0, bonusSecs:0, done:false };
+  rgShowPanel('rg-arrange-panel');
+  $('rg-tap-big').classList.remove('show');
+  $('rg-line').classList.remove('show');
+  $('rg-assembly').style.display = 'none';
+  rgArrBeginVerse(0);
+}
+
+function rgArrShuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+function rgArrBeginVerse(vi){
+  const verse = rgArr.verses[vi];
+  const correct = verse.lines.map(l => l.text);
+  let shuffled = rgArrShuffle(correct);
+  if(shuffled.every((s,i)=>s===correct[i])){ [shuffled[0],shuffled[1]]=[shuffled[1],shuffled[0]]; }
+  const vs = verse.lines[0].start;
+  const rawEnd = verse.lines[verse.lines.length-1].end;
+  const effEnd = Math.min(rawEnd, verse.lines[verse.lines.length-1].start + 8);
+
+  rgArr.verseIdx = vi;
+  rgArr.correct = correct;
+  rgArr.current = shuffled;
+  rgArr.vStart = vs;
+  rgArr.duration = effEnd - vs;
+  rgArr.startedAt = null;
+  rgArr.timeLeft = rgArr.duration;
+  rgArr.timerRunning = false;
+  rgArr.verseDone = false;
+
+  $('rg-arr-vlabel').textContent = 'VERSE ' + (vi+1) + ' / ' + rgArr.verses.length;
+  rgArrRenderCards();
+  rgArrHud();
+
+  // Seek + play
+  rgVideo = !!(AUD.ready() && (song.videoId || song.audioKey));
+  if(rgVideo){
+    try{ AUD.seek(vs); AUD.play(); }catch(e){ rgVideo=false; }
+  }
+  rgArr.startedAt = performance.now();
+  rgArr.timerRunning = true;
+  if(rgArrRAF) cancelAnimationFrame(rgArrRAF);
+  rgArrTick();
+}
+
+function rgArrRenderCards(){
+  const c = $('rg-arr-cards');
+  c.innerHTML = '';
+  rgArr.current.forEach((text) => {
+    const card = document.createElement('div');
+    card.className = 'rg-arr-card';
+    card.dataset.text = text;
+    card.innerHTML = '<span class="grip">⠿</span><span class="card-text">' + text + '</span>';
+    card.addEventListener('pointerdown', rgArrPD);
+    c.appendChild(card);
+  });
+}
+
+function rgArrPD(e){
+  if(!rgArr || rgArr.verseDone || rgArr.done) return;
+  if(rgArrDragCard) return;
+  e.preventDefault();
+  const card = e.currentTarget;
+  rgArrDragCard = card;
+  rgArrDragPid = e.pointerId;
+  card.classList.add('dragging');
+  $('rg-arr-cards').querySelectorAll('.rg-arr-card').forEach(el => el.classList.remove('wrong','correct'));
+}
+document.addEventListener('pointermove', function(e){
+  if(!rgArrDragCard || e.pointerId !== rgArrDragPid) return;
+  e.preventDefault();
+  const container = $('rg-arr-cards');
+  const y = e.clientY;
+  const siblings = [...container.querySelectorAll('.rg-arr-card')].filter(s=>s!==rgArrDragCard);
+  let placed = false;
+  for(const sib of siblings){
+    const r = sib.getBoundingClientRect();
+    if(y < r.top + r.height/2){ if(sib.previousElementSibling !== rgArrDragCard){ container.insertBefore(rgArrDragCard, sib); } placed=true; break; }
+  }
+  if(!placed && container.lastElementChild !== rgArrDragCard) container.appendChild(rgArrDragCard);
+}, {passive:false});
+document.addEventListener('pointerup', function(e){
+  if(!rgArrDragCard || e.pointerId !== rgArrDragPid) return;
+  rgArrDragCard.classList.remove('dragging');
+  rgArrDragCard = null; rgArrDragPid = null;
+  if(rgArr) rgArr.current = [...$('rg-arr-cards').querySelectorAll('.rg-arr-card')].map(el=>el.dataset.text);
+});
+document.addEventListener('pointercancel', function(e){
+  if(!rgArrDragCard || e.pointerId !== rgArrDragPid) return;
+  rgArrDragCard.classList.remove('dragging');
+  rgArrDragCard = null; rgArrDragPid = null;
+  if(rgArr) rgArr.current = [...$('rg-arr-cards').querySelectorAll('.rg-arr-card')].map(el=>el.dataset.text);
+});
+
+function rgArrTick(){
+  if(!rgArr || rgArr.done) return;
+  rgArrRAF = requestAnimationFrame(rgArrTick);
+  if(!rgArr.timerRunning) return;
+  const elapsed = (performance.now() - rgArr.startedAt) / 1000;
+  rgArr.timeLeft = Math.max(0, rgArr.duration - elapsed);
+  const pct = (rgArr.timeLeft / rgArr.duration) * 100;
+  const bar = $('rg-arr-timer-bar');
+  bar.style.width = pct + '%';
+  bar.classList.toggle('danger', pct < 25);
+  $('rg-arr-time').textContent = Math.ceil(rgArr.timeLeft) + 's';
+  if(rgArr.timeLeft <= 0){
+    rgArr.timerRunning = false;
+    if(rgVideo) try{ AUD.pause(); }catch(e){}
+  }
+}
+
+function rgArrReplay(){
+  if(!rgArr || rgArr.verseDone || rgArr.done) return;
+  if(rgVideo) try{ AUD.seek(rgArr.vStart); AUD.play(); }catch(e){}
+}
+
+function rgArrCheck(){
+  if(!rgArr || rgArr.verseDone || rgArr.done) return;
+  const cards = $('rg-arr-cards').querySelectorAll('.rg-arr-card');
+  let ok = true;
+  rgArr.current.forEach((text,i)=>{
+    if(text === rgArr.correct[i]){ cards[i].classList.add('correct'); cards[i].classList.remove('wrong'); }
+    else { cards[i].classList.add('wrong'); cards[i].classList.remove('correct'); ok=false; }
+  });
+  if(!ok) return;
+  rgArr.verseDone = true;
+  rgArr.timerRunning = false;
+  if(rgVideo) try{ AUD.pause(); }catch(e){}
+  const pts = rgArr.correct.length;
+  const bonus = Math.ceil(rgArr.timeLeft);
+  rgArr.points += pts;
+  rgArr.bonusSecs += bonus;
+  rgArrHud();
+  const next = rgArr.verseIdx + 1;
+  setTimeout(()=>{
+    if(next < rgArr.verses.length){
+      rgArrBeginVerse(next);
+    } else {
+      rgArrFinish();
+    }
+  }, 1200);
+}
+
+function rgArrHud(){
+  $('rg-arr-pts').textContent = rgArr.points;
+  $('rg-arr-bonus').textContent = rgArr.bonusSecs + 's';
+}
+
+async function rgArrFinish(){
+  rgArr.done = true;
+  if(rgArrRAF) cancelAnimationFrame(rgArrRAF);
+  if(rgVideo) try{ AUD.pause(); }catch(e){}
+  const pts = rgArr.points;
+  const mult = Math.max(1, rgArr.bonusSecs);
+  const final = pts * mult;
+  // Save score
+  const all = (await store.get('rg-scores-v2')) || {};
+  const sid = song.id || song.title;
+  if(!all[sid]) all[sid] = {};
+  if(!all[sid].arrange) all[sid].arrange = {hist:[],best:0};
+  const e = all[sid].arrange;
+  const isHigh = final > e.best;
+  e.hist.unshift(final); e.hist = e.hist.slice(0,4);
+  if(isHigh) e.best = final;
+  await store.set('rg-scores-v2', all);
+  // Show results
+  rgRenderResults({
+    grade: isHigh ? '★' : '✓',
+    score: final,
+    accLine: pts + ' of ' + rgArr.verses.reduce((n,v)=>n+v.lines.length,0) + ' lines placed',
+    mathLine: pts + ' lines × ' + mult + 's bonus = ' + final.toLocaleString(),
+    comboLine: 'Time banked: ' + rgArr.bonusSecs + 's',
+    isHigh, best: e.best
+  });
+}
+
+// ═══════════════════════════════════════════════════
+//  QUICK PICK — 6 options per line, whole song
+// ═══════════════════════════════════════════════════
+let rgQP = null, rgQP_RAF = null;
+
+const QP_SKIP = new Set(['ja','on','ei','se','ne','me','te','he','hän','kun','tai',
+  'jos','nyt','jo','hei','yhä','voi','pois','vaan','niin','mutta','siis','siksi','yli',
+  'ali','kin','kuin','myös','vai','tuo','tää']);
+
+function qpPickGap(line){
+  const words = line.text.split(/\s+/);
+  const cands = [];
+  words.forEach((w,i)=>{
+    const isVerb = line.verbs && line.verbs.some(v=>v.surface===w);
+    if(isVerb || (w.length > 3 && !QP_SKIP.has(w))) cands.push({word:w, idx:i, isVerb});
+  });
+  if(!cands.length){ const l=words.reduce((a,b)=>a.length>=b.length?a:b); return {word:l,idx:words.indexOf(l)}; }
+  const verbs = cands.filter(c=>c.isVerb);
+  if(verbs.length) return verbs[Math.floor(Math.random()*verbs.length)];
+  return cands[Math.floor(Math.random()*cands.length)];
+}
+
+function rgQPStart(){
+  rgStop();
+  const flat = rgArrFlatLines();
+  if(!flat.length){ toast('Need a song with verses'); return; }
+  // Build rounds: one per line across whole song
+  const pool = [];
+  flat.forEach(l => l.text.split(/\s+/).forEach(w => { if(w.length>3 && !QP_SKIP.has(w) && !pool.includes(w)) pool.push(w); }));
+
+  const rounds = flat.map(line => {
+    const gap = qpPickGap(line);
+    let decoys = pool.filter(w=>w!==gap.word).sort(()=>Math.random()-.5).slice(0,5);
+    const options = [gap.word, ...decoys].sort(()=>Math.random()-.5);
+    return {line, gap, options, resolved:false, hit:false};
+  });
+
+  rgQP = { rounds, roundIdx:-1, points:0, streak:0, bestStreak:0, misses:0, done:false };
+  rgShowPanel('rg-qp-panel');
+  $('rg-tap-big').classList.remove('show');
+  $('rg-line').classList.remove('show');
+  $('rg-assembly').style.display = 'none';
+  $('rg-qp-pts').textContent = '0';
+  $('rg-qp-streak').textContent = '0';
+  $('rg-qp-best').textContent = '0';
+  $('rg-qp-line').innerHTML = '<span style="color:var(--rgo)">Get ready…</span>';
+  $('rg-qp-options').innerHTML = '';
+  $('rg-qp-feedback').textContent = '';
+
+  rgVideo = !!(AUD.ready() && (song.videoId || song.audioKey));
+  const t0 = flat[0].start;
+  if(rgVideo) try{ AUD.seek(Math.max(0, t0 - 2)); AUD.play(); }catch(e){ rgVideo=false; }
+  if(rgQP_RAF) cancelAnimationFrame(rgQP_RAF);
+  rgQP_RAF = requestAnimationFrame(rgQPTick);
+}
+
+function rgQPTick(){
+  if(!rgQP || rgQP.done) return;
+  rgQP_RAF = requestAnimationFrame(rgQPTick);
+  let t;
+  try{ t = AUD.now(); }catch(e){ return; }
+  const rounds = rgQP.rounds;
+  // Latest line whose start we've reached — handles overlapping/contiguous
+  // timestamps and keeps the round answerable through instrumental gaps.
+  let activeIdx = -1;
+  for(let i=0;i<rounds.length;i++){
+    if(t >= rounds[i].line.start - 0.3) activeIdx = i;
+  }
+  if(activeIdx !== rgQP.roundIdx){
+    // Resolve every unresolved round we've moved past (handles seeks/skips too)
+    let missed=false;
+    for(let i=0;i<activeIdx;i++){
+      const r=rounds[i];
+      if(!r.resolved){ r.resolved=true; rgQP.misses++; rgQP.streak=0; missed=true; }
+    }
+    if(missed) rgQPHud();
+    if(activeIdx >= 0){ rgQP.roundIdx=activeIdx; rgQPShowRound(rounds[activeIdx]); }
+  }
+  // Per-line timer
+  if(activeIdx >= 0){
+    const line = rounds[activeIdx].line;
+    const pct = Math.min(100, Math.max(0, (t-line.start)/(line.end-line.start)*100));
+    $('rg-qp-timer-bar').style.width = (100-pct) + '%';
+  }
+  // Song end?
+  const last = rounds[rounds.length-1].line;
+  if(t > last.end + 1){ const lr=rounds[rounds.length-1]; if(!lr.resolved){lr.resolved=true;rgQP.misses++;} rgQPFinish(); }
+}
+
+function rgQPShowRound(round){
+  const words = round.line.text.split(/\s+/);
+  const html = words.map((w,i)=> i===round.gap.idx ? '<span class="qgap">___</span>' : w).join(' ');
+  $('rg-qp-line').innerHTML = html;
+  $('rg-qp-feedback').textContent = '';
+  const c = $('rg-qp-options');
+  c.innerHTML = '';
+  round.options.forEach(w=>{
+    const b = document.createElement('button');
+    b.className = 'rg-qp-opt';
+    b.textContent = w;
+    b.addEventListener('click', ()=> rgQPPick(round, w, b));
+    c.appendChild(b);
+  });
+}
+
+function rgQPPick(round, word, btn){
+  if(round.resolved || !rgQP || rgQP.done) return;
+  if(word === round.gap.word){
+    round.resolved = true; round.hit = true;
+    rgQP.points++; rgQP.streak++;
+    rgQP.bestStreak = Math.max(rgQP.bestStreak, rgQP.streak);
+    btn.classList.add('hit');
+    const words = round.line.text.split(/\s+/);
+    $('rg-qp-line').innerHTML = words.map((w,i)=> i===round.gap.idx ? '<span class="qgap filled">'+w+'</span>' : w).join(' ');
+    $('rg-qp-options').querySelectorAll('.rg-qp-opt').forEach(b=>{ if(b!==btn) b.classList.add('disabled'); });
+    if(rgQP.streak >= 3) $('rg-qp-feedback').textContent = rgQP.streak + ' STREAK!';
+    rgQPHud();
+  } else {
+    btn.classList.add('wrong');
+    rgQP.streak = 0;
+    rgQPHud();
+  }
+}
+
+function rgQPHud(){
+  $('rg-qp-pts').textContent = rgQP.points;
+  $('rg-qp-streak').textContent = rgQP.streak > 2 ? rgQP.streak + '🔥' : rgQP.streak;
+  $('rg-qp-best').textContent = rgQP.bestStreak;
+}
+
+async function rgQPFinish(){
+  rgQP.done = true;
+  if(rgVideo) try{ AUD.pause(); }catch(e){}
+  cancelAnimationFrame(rgQP_RAF);
+  const pts = rgQP.points;
+  const bonus = Math.max(1, rgQP.bestStreak);
+  const final = pts * bonus;
+  // Save
+  const all = (await store.get('rg-scores-v2')) || {};
+  const sid = song.id || song.title;
+  if(!all[sid]) all[sid] = {};
+  if(!all[sid].quickpick) all[sid].quickpick = {hist:[],best:0};
+  const e = all[sid].quickpick;
+  const isHigh = final > e.best;
+  e.hist.unshift(final); e.hist = e.hist.slice(0,4);
+  if(isHigh) e.best = final;
+  await store.set('rg-scores-v2', all);
+  // Results
+  rgRenderResults({
+    grade: isHigh ? '★' : '✓',
+    score: final,
+    accLine: pts + ' of ' + rgQP.rounds.length + ' words caught',
+    mathLine: pts + ' pts × ' + bonus + ' best streak = ' + final.toLocaleString(),
+    comboLine: 'Best streak: ' + rgQP.bestStreak + ' · Missed: ' + rgQP.misses,
+    isHigh, best: e.best
+  });
+}
+
 $('rg-test-fab').addEventListener('click', ()=>{ if(!song){ toast('Open a song first'); return; } rgOpen(); });
 $('rg-mode-tiles').addEventListener('click', ()=>rgStartRun('tiles'));
+$('rg-mode-arrange').addEventListener('click', rgArrStart);
+$('rg-mode-quickpick').addEventListener('click', rgQPStart);
+$('rg-arr-replay').addEventListener('click', rgArrReplay);
+$('rg-arr-check').addEventListener('click', rgArrCheck);
+
 $('rg-mode-tap').addEventListener('click', ()=>rgStartRun('tap'));
+// ── Tile Tap Easy/Hard toggle ──
+document.querySelectorAll('.rg-diff').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.rg-diff').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    rgTileEasy = btn.dataset.diff === 'easy';
+    rgLoadBests();
+  });
+});
+
 $('rg-play').addEventListener('click', rgGo);
 $('rg-pause').addEventListener('click', rgPauseGame);
 (function(){
@@ -5317,6 +6097,10 @@ $('ch-skip-btn').addEventListener('click', ()=>{ stopAudio(); $('challenge-overl
 $('ch-next-btn').addEventListener('click', ()=>{ stopAudio(); chIdx++; renderChQuestion(); });
 $('ch-done-btn').addEventListener('click', finishChallenge);
 $('import-back-btn').addEventListener('click', renderHome);
+$('src-tab-yt').addEventListener('click', ()=>{ if(!$('src-tab-yt').disabled) setImportSrc('yt'); });
+$('src-tab-file').addEventListener('click', ()=>{ if(!$('src-tab-file').disabled) setImportSrc('file'); });
+$('pick-audio-btn').addEventListener('click', ()=>$('in-audio').click());
+$('in-audio').addEventListener('change', e=>onAudioPicked(e.target.files && e.target.files[0]));
 $('analyze-btn').addEventListener('click', analyze);
 $('analyze-back-btn').addEventListener('click', ()=>showScreen('import-screen'));
 $('analyze-retry-btn').addEventListener('click', runAnalysis);
@@ -5325,13 +6109,13 @@ $('review-next-btn').addEventListener('click', async ()=>{
   if(!validateReview()) return;
   normalizeSongTexts(song); // review edits may reintroduce caps/punctuation
   await saveSong();
-  if(song.videoId) startTagger();
+  if(song.videoId || song.audioKey) startTagger();
   else startGame();
 });
 $('tag-btn').addEventListener('click', tagTap);
 $('tag-restart-btn').addEventListener('click', ()=>startTagger(true));
 $('edit-tags-btn').addEventListener('click', ()=>{
-  if(!song.videoId){ toast('No video attached — use ✎ Edit text to add a YouTube link first'); return }
+  if(!song.videoId && !song.audioKey){ toast('No audio attached — use ✎ Edit text to add a YouTube link or an audio file first'); return }
   stopAudio(); startTagger();
 });
 $('edit-trans-btn').addEventListener('click', openTransEditor);
@@ -5345,6 +6129,16 @@ $('edit-text-btn').addEventListener('click', ()=>{
   const anyTrans = song.verses.some(v=>v.lines.some(l=>l.english));
   $('in-trans').value = anyTrans ? song.verses.map(v=>v.lines.map(l=>l.english||'').join('\n')).join('\n\n') : '';
   $('in-video').value = song.videoId ? 'https://www.youtube.com/watch?v='+song.videoId : '';
+  $('in-audio').value=''; onAudioPicked(null);
+  if(song.audioKey){
+    setImportSrc('file');
+    const info=$('audio-pick-info');
+    info.className='f-hint ok';
+    info.textContent='✓ Using the audio file attached at import. Choose another to replace it.';
+  } else {
+    setImportSrc('yt');
+  }
+  lockImportSrc(!!song.id);
   showScreen('import-screen');
   toast('Saving changes re-runs the AI analysis');
 });
