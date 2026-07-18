@@ -2294,11 +2294,11 @@ function playQuizAudio(text, videoId, start, end, cb, audioKey){
   stopAudio(); // stop any playing segment/TTS first
   // Uploaded-audio songs: load the blob, then play the segment via AUD.
   if(audioKey && start!=null && end!=null){
-    if(fileState==='ready' && fileLoadedKey===audioKey){ playSegment(start, end, cb); return; }
+    if(fileState==='ready' && fileLoadedKey===audioKey){ audUse('file'); playSegment(start, end, cb); return; }
     adbGet(audioKey).then(blob=>{
       if(!blob){ speakFi(text, cb); return; }
       fileAttach(blob, audioKey).then(ok=>{
-        if(ok) playSegment(start, end, cb); else speakFi(text, cb);
+        if(ok){ audUse('file'); playSegment(start, end, cb); } else speakFi(text, cb);
       });
     }).catch(()=>speakFi(text, cb));
     return;
@@ -2306,6 +2306,7 @@ function playQuizAudio(text, videoId, start, end, cb, audioKey){
   if(videoId && start!=null && end!=null && ytState!=='failed'){
     const play = ()=> playSegment(start, end, cb);
     if(ytState==='ready'){
+      audUse('yt');
       if(_quizVideoId===videoId){ play(); return; }
       _quizVideoId = videoId; ytLoadedId = videoId;
       try{ ytPlayer.loadVideoById({videoId, startSeconds:start}); }
@@ -2315,7 +2316,7 @@ function playQuizAudio(text, videoId, start, end, cb, audioKey){
     }
     // player not yet loaded — load it, then play (or fall back to TTS)
     loadYT(videoId, ok=>{
-      if(ok){ _quizVideoId=videoId; play(); }
+      if(ok){ audUse('yt'); _quizVideoId=videoId; play(); }
       else speakFi(text, cb);
     });
     return;
@@ -3205,51 +3206,69 @@ function fileAttach(blob, key){
     try{ el.load(); }catch(e){}
   });
 }
-// True when the active song plays from an uploaded file.
+// True when the given (or active) song's SOURCE is an uploaded file.
 function usingFile(s){ const t = s || (typeof song!=='undefined' ? song : null); return !!(t && t.audioKey); }
+// Is the given (or active) song's own source loaded and ready?
+function songSrcReady(s){
+  const t = s || (typeof song!=='undefined' ? song : null);
+  if(!t) return false;
+  return t.audioKey ? (fileState==='ready' && fileLoadedKey===t.audioKey) : ytState==='ready';
+}
+// The transport currently in control of AUD.* calls. Every playback path sets
+// this explicitly before playing, so cross-library items (Daily Challenge,
+// Library Quiz) can't read one clock while the other transport is playing.
+let audBackend='yt';
+function audUse(which){
+  if(audBackend===which) return;
+  // silence the transport being left behind
+  if(which==='file'){ if(ytState==='ready'){ try{ ytPlayer.pauseVideo(); }catch(e){} } }
+  else if(fileEl){ try{ fileEl.pause(); }catch(e){} }
+  audBackend = which;
+}
+function audSyncToSong(){ audUse(usingFile() ? 'file' : 'yt'); }
 
 const AUD = {
   // which backend the current song uses
-  isFile(){ return usingFile(); },
+  isFile(){ return audBackend==='file'; },
   // is the backend ready to play?
-  ready(){ return usingFile() ? fileState==='ready' : ytState==='ready'; },
-  failed(){ return usingFile() ? fileState==='failed' : ytState==='failed'; },
+  ready(){ return audBackend==='file' ? fileState==='ready' : ytState==='ready'; },
+  failed(){ return audBackend==='file' ? fileState==='failed' : ytState==='failed'; },
   now(){
-    if(usingFile()){ try{ return fileEl ? fileEl.currentTime : 0; }catch(e){ return 0; } }
+    if(audBackend==='file'){ try{ return fileEl ? fileEl.currentTime : 0; }catch(e){ return 0; } }
     try{ return ytPlayer.getCurrentTime(); }catch(e){ return 0; }
   },
   duration(){
-    if(usingFile()){ try{ return (fileEl && isFinite(fileEl.duration)) ? fileEl.duration : 0; }catch(e){ return 0; } }
+    if(audBackend==='file'){ try{ return (fileEl && isFinite(fileEl.duration)) ? fileEl.duration : 0; }catch(e){ return 0; } }
     try{ return ytPlayer.getDuration(); }catch(e){ return 0; }
   },
   seek(t){
-    if(usingFile()){ try{ fileAudioEl().currentTime = Math.max(0,t); }catch(e){} return; }
+    if(audBackend==='file'){ try{ fileAudioEl().currentTime = Math.max(0,t); }catch(e){} return; }
     try{ ytPlayer.seekTo(Math.max(0,t), true); }catch(e){}
   },
   play(){
-    if(usingFile()){ try{ const pr=fileAudioEl().play(); if(pr&&pr.catch) pr.catch(()=>{}); }catch(e){} return; }
+    if(audBackend==='file'){ try{ const pr=fileAudioEl().play(); if(pr&&pr.catch) pr.catch(()=>{}); }catch(e){} return; }
     try{ ytPlayer.playVideo(); }catch(e){}
   },
   pause(){
-    if(usingFile()){ try{ fileAudioEl().pause(); }catch(e){} return; }
-    try{ AUD.pause(); }catch(e){}
+    if(audBackend==='file'){ try{ fileAudioEl().pause(); }catch(e){} return; }
+    try{ ytPlayer.pauseVideo(); }catch(e){}
   },
   rate(r){
-    if(usingFile()){ try{ fileAudioEl().playbackRate = r; }catch(e){} return; }
+    if(audBackend==='file'){ try{ fileAudioEl().playbackRate = r; }catch(e){} return; }
     try{ if(ytPlayer.setPlaybackRate) ytPlayer.setPlaybackRate(r); }catch(e){}
   },
   // Load the audio source for song `s`. cb(ok).
   load(s, cb){
     if(usingFile(s)){
-      if(fileState==='ready' && fileLoadedKey===s.audioKey){ cb(true); return; }
+      if(fileState==='ready' && fileLoadedKey===s.audioKey){ audUse('file'); cb(true); return; }
       adbGet(s.audioKey).then(blob=>{
         if(!blob){ fileState='failed'; cb(false); return; }
-        fileAttach(blob, s.audioKey).then(cb);
+        fileAttach(blob, s.audioKey).then(ok=>{ if(ok) audUse('file'); cb(ok); });
       }).catch(()=>{ fileState='failed'; cb(false); });
       return;
     }
     if(!s || !s.videoId){ cb(false); return; }
-    loadYT(s.videoId, cb);
+    loadYT(s.videoId, ok=>{ if(ok) audUse('yt'); cb(ok); });
   },
   // Cue without autoplay (used when switching songs).
   cue(s, cb){
@@ -3426,12 +3445,12 @@ function stopAudio(){
   if(curPlayBtn){ curPlayBtn.classList.remove('playing'); curPlayBtn=null; }
   if(!suppressVerseReset && typeof versePlaying!=='undefined' && versePlaying) setVerseBtn(false);
 }
-function hasVideoFor(line){ return AUD.ready() && line.start!=null && line.end!=null; }
+function hasVideoFor(line){ return songSrcReady(song) && line.start!=null && line.end!=null; }
 function playLine(line, btn, onend){
   stopAudio();
   if(btn){ curPlayBtn=btn; btn.classList.add('playing'); }
   const done = ()=>{ if(curPlayBtn){curPlayBtn.classList.remove('playing');curPlayBtn=null;} if(onend) onend(); };
-  if(hasVideoFor(line)){ playSegment(line.start, line.end, done); return }
+  if(hasVideoFor(line)){ audSyncToSong(); playSegment(line.start, line.end, done); return }
   if(window.speechSynthesis){
     const u = new SpeechSynthesisUtterance(line.text);
     u.lang = song.bcp47; u.rate = 0.88;
@@ -3456,6 +3475,7 @@ function playVerseSeq(){
   const finish = ()=> setVerseBtn(false);
   // contiguous video segments play as one span; else line-by-line
   if(lines.every(hasVideoFor)){
+    audSyncToSong();
     playSegment(lines[0].start, lines[lines.length-1].end, finish); return;
   }
   let i=0; const step=()=>{
@@ -4716,11 +4736,10 @@ function startGame(){
   showScreen('game-screen');
   updateSharePill();
   if(usingFile(song)){
-    // uploaded audio: load the blob from IndexedDB in the background
-    if(!(fileState==='ready' && fileLoadedKey===song.audioKey)){
-      AUD.load(song, ok=>{ if(!ok) toast('Audio file missing — using spoken audio'); });
-    }
+    // uploaded audio: load (or re-activate) the blob; AUD.load sets the backend
+    AUD.load(song, ok=>{ if(!ok) toast('Audio file missing — using spoken audio'); });
   } else if(song.videoId){
+    audUse('yt');
     if(ytState==='unloaded'){
       // load in background; playLine() checks availability live, so no restart needed
       loadYT(song.videoId, ok=>{ if(!ok) toast('Video unavailable here — using spoken audio'); });
@@ -5426,7 +5445,8 @@ function rgStartRun(mode){
   $('rg-assembly').style.display = rgMode==='tap' ? 'none' : 'flex';
   if(rgMode==='tap'){ rgLineRender(); }
   // arm: cue the video (paused) at the pre-roll point; player presses ▶ when ready
-  rgVideo = !!(AUD.ready() && (song.videoId || song.audioKey));
+  rgVideo = !!(songSrcReady(song) && (song.videoId || song.audioKey));
+  if(rgVideo) audSyncToSong();
   if(rgVideo){
     try{
       AUD.seek(Math.max(0,rgData.t0-3));
@@ -5569,7 +5589,8 @@ function rgClose(){
 // ── Refine pass: tap syllable onsets against the real recording ──
 let rgRefTimes=[], rgRefLi=0, rgRefSi=0, rgRefFlat=[], rgRefSyls=[];
 function rgRefineStart(){
-  if(!AUD.ready() || !(song.videoId||song.audioKey)){ toast('Refining needs the audio loaded'); return; }
+  if(!songSrcReady(song) || !(song.videoId||song.audioKey)){ toast('Refining needs the audio loaded'); return; }
+  audSyncToSong();
   rgRefFlat=rgFlatLines();
   rgRefSyls=rgRefFlat.map(l=>rgSylTexts(l.text));
   rgRefTimes=rgRefFlat.map(()=>[]);
@@ -5721,7 +5742,8 @@ function rgArrBeginVerse(vi){
   rgArrHud();
 
   // Seek + play
-  rgVideo = !!(AUD.ready() && (song.videoId || song.audioKey));
+  rgVideo = !!(songSrcReady(song) && (song.videoId || song.audioKey));
+  if(rgVideo) audSyncToSong();
   if(rgVideo){
     try{ AUD.seek(vs); AUD.play(); }catch(e){ rgVideo=false; }
   }
@@ -5911,7 +5933,8 @@ function rgQPStart(){
   $('rg-qp-options').innerHTML = '';
   $('rg-qp-feedback').textContent = '';
 
-  rgVideo = !!(AUD.ready() && (song.videoId || song.audioKey));
+  rgVideo = !!(songSrcReady(song) && (song.videoId || song.audioKey));
+  if(rgVideo) audSyncToSong();
   const t0 = flat[0].start;
   if(rgVideo) try{ AUD.seek(Math.max(0, t0 - 2)); AUD.play(); }catch(e){ rgVideo=false; }
   if(rgQP_RAF) cancelAnimationFrame(rgQP_RAF);
